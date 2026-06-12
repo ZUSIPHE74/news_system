@@ -1,0 +1,244 @@
+{% extends 'news_app/base.html' %}
+{% block title %}{{ article.title }} – NewsApp{% endblock %}
+{% block content %}
+
+<style>
+    .article-container {
+        font-family: 'Lora', serif;
+        max-width: 720px;
+        margin: 0 auto;
+        color: #f3f4f6;
+    }
+    .article-overline {
+        font-family: 'Inter', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        margin-bottom: 12px;
+        display: block;
+    }
+    .article-title {
+        font-family: 'Lora', serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 16px;
+        color: #ffffff;
+    }
+    .article-subtitle {
+        font-family: 'Lora', serif;
+        font-size: 1.25rem;
+        line-height: 1.5;
+        color: var(--text-muted);
+        margin-bottom: 24px;
+    }
+    .article-meta-row {
+        font-family: 'Inter', sans-serif;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        border-top: 1px solid var(--glass-border);
+        border-bottom: 1px solid var(--glass-border);
+        padding: 12px 0;
+        margin-bottom: 32px;
+    }
+    .article-meta-row a {
+        color: #ffffff;
+        font-weight: 600;
+        text-decoration: none;
+    }
+    .article-meta-row a:hover {
+        text-decoration: underline;
+    }
+    .article-body {
+        font-size: 1.15rem;
+        line-height: 1.8;
+        color: #e5e7eb;
+    }
+    .article-body p {
+        margin-bottom: 24px;
+    }
+    /* Drop Cap for first letter of first paragraph */
+    .article-body > p:first-of-type::first-letter {
+        float: left;
+        font-size: 4.5rem;
+        line-height: 0.8;
+        padding-top: 4px;
+        padding-right: 8px;
+        padding-left: 3px;
+        font-family: 'Lora', serif;
+        font-weight: 700;
+        color: #ffffff;
+    }
+    .article-image-container {
+        margin: 32px 0;
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        border: 1px solid var(--glass-border);
+    }
+    .article-image-container img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    
+    /* Subheading styles */
+    .article-body h2, .article-body h3 {
+        font-family: 'Lora', serif;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin: 40px 0 16px;
+        padding-left: 16px;
+        border-left: 4px solid var(--text-muted);
+    }
+
+    /* Subscriptions in header */
+    .inline-sub-btn {
+        background: none;
+        border: 1px solid var(--glass-border);
+        color: var(--text-muted);
+        border-radius: 20px;
+        padding: 2px 8px;
+        font-size: 0.7rem;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    .inline-sub-btn:hover { background: var(--glass); color: white; }
+    .inline-sub-btn.subscribed { color: #6ee7b7; border-color: rgba(16,185,129,0.4); }
+</style>
+
+<div class="article-container">
+    <span class="article-overline">
+        {% if article.publisher %}PUBLISHED BY {{ article.publisher.name|upper }} {% else %}INDEPENDENT JOURNALISM{% endif %} · {{ article.date_posted|date:"M Y"|upper }}
+    </span>
+    
+    <h1 class="article-title">{{ article.title }}</h1>
+    
+    <!-- We don't have a subtitle field, so we skip it or use a snippet of content -->
+    
+    <div class="article-meta-row">
+        <div>By <a href="{% url 'journalist_profile' article.author.pk %}">{{ article.author.username }}</a>
+            {% if user.is_authenticated and user.role == 'reader' %}
+            <button class="inline-sub-btn {% if article.author in user.subscribed_journalists.all %}subscribed{% endif %}"
+                data-subscribe
+                data-url="{% if article.author in user.subscribed_journalists.all %}{% url 'unsubscribe_from_journalist' article.author.pk %}{% else %}{% url 'subscribe_to_journalist' article.author.pk %}{% endif %}"
+                data-sub-url="{% url 'subscribe_to_journalist' article.author.pk %}"
+                data-unsub-url="{% url 'unsubscribe_from_journalist' article.author.pk %}">
+                {% if article.author in user.subscribed_journalists.all %}<i class="fa-solid fa-check"></i> Subscribed{% else %}<i class="fa-solid fa-plus"></i> Subscribe{% endif %}
+            </button>
+            {% endif %}
+        </div>
+        
+        <div style="color: var(--glass-border);">|</div>
+        <div>{{ article.date_posted|date:"F d, Y" }}</div>
+        
+        {% if article.publisher %}
+        <div style="color: var(--glass-border);">|</div>
+        <div>
+            <a href="{% url 'publisher_profile' article.publisher.pk %}">{{ article.publisher.name }}</a>
+            {% if user.is_authenticated and user.role == 'reader' %}
+            <button class="inline-sub-btn {% if article.publisher in user.subscribed_publishers.all %}subscribed{% endif %}"
+                data-subscribe
+                data-url="{% if article.publisher in user.subscribed_publishers.all %}{% url 'unsubscribe_from_publisher' article.publisher.pk %}{% else %}{% url 'subscribe_to_publisher' article.publisher.pk %}{% endif %}"
+                data-sub-url="{% url 'subscribe_to_publisher' article.publisher.pk %}"
+                data-unsub-url="{% url 'unsubscribe_from_publisher' article.publisher.pk %}">
+                {% if article.publisher in user.subscribed_publishers.all %}<i class="fa-solid fa-check"></i> Subscribed{% else %}<i class="fa-solid fa-plus"></i> Subscribe{% endif %}
+            </button>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+
+    {% if article.image %}
+    <div class="article-image-container">
+        <img src="{{ article.image.url }}" alt="Article Image">
+    </div>
+    {% endif %}
+
+    <div class="article-body">
+        <p>{{ article.content|linebreaksbr }}</p>
+    </div>
+</div>
+
+<!-- ── Suggested Articles ── -->
+{% if suggested_articles %}
+<div class="suggestions-title" style="margin-top: 60px;"><i class="fa-solid fa-book-open"></i> Read Next</div>
+{% for suggested in suggested_articles %}
+<div class="card" style="padding:16px 20px;">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px;">
+        <div style="flex:1;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+                <a href="{% url 'journalist_profile' suggested.author.pk %}" class="avatar" style="width:32px; height:32px; font-size:0.8rem; flex-shrink:0; text-decoration:none;">
+                    {% if suggested.author.profile_picture %}
+                        <img src="{{ suggested.author.profile_picture.url }}" alt="">
+                    {% else %}
+                        {{ suggested.author.username|first|upper }}
+                    {% endif %}
+                </a>
+                <div>
+                    <a href="{% url 'journalist_profile' suggested.author.pk %}" style="font-weight:600; font-size:0.875rem; color:var(--text); text-decoration:none;">{{ suggested.author.username }}</a>
+                    {% if suggested.publisher %}
+                    <span style="color:var(--text-dim); font-size:0.78rem;"> · {{ suggested.publisher.name }}</span>
+                    {% endif %}
+                </div>
+            </div>
+            <a href="{% url 'article_detail' suggested.pk %}" class="post-title" style="font-size:1rem; margin-bottom:0;">{{ suggested.title }}</a>
+        </div>
+        <a href="{% url 'article_detail' suggested.pk %}" class="btn btn-ghost btn-sm" style="flex-shrink:0; white-space:nowrap;"><i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+
+{% if suggested_publishers %}
+<div class="suggestions-title" style="margin-top: 40px;"><i class="fa-solid fa-building"></i> Suggested Publishers</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 32px;">
+    {% for pub in suggested_publishers %}
+    <div class="card" style="margin-bottom: 0; padding: 16px; text-align: center;">
+        <div class="avatar" style="width: 48px; height: 48px; margin: 0 auto 12px; font-size: 1.2rem;">
+            <i class="fa-solid fa-building"></i>
+        </div>
+        <a href="{% url 'publisher_profile' pub.pk %}" style="display: block; font-weight: 700; color: var(--text); text-decoration: none; margin-bottom: 4px;">{{ pub.name }}</a>
+        <div style="font-size: 0.75rem; color: var(--text-dim); margin-bottom: 12px;">{{ pub.subscribers.count }} Subscribers</div>
+        
+        {% if user.is_authenticated and user.role == 'reader' %}
+            <button class="btn btn-ghost btn-sm" style="width: 100%; justify-content: center; border-radius: 20px;"
+                data-subscribe
+                data-url="{% if pub in user.subscribed_publishers.all %}{% url 'unsubscribe_from_publisher' pub.pk %}{% else %}{% url 'subscribe_to_publisher' pub.pk %}{% endif %}"
+                data-sub-url="{% url 'subscribe_to_publisher' pub.pk %}"
+                data-unsub-url="{% url 'unsubscribe_from_publisher' pub.pk %}">
+                {% if pub in user.subscribed_publishers.all %}✓ Following{% else %}+ Follow{% endif %}
+            </button>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div style="margin-top:24px; text-align: center;">
+    <a href="{% url 'home' %}" class="btn btn-ghost"><i class="fa-solid fa-arrow-left"></i> Back to Feed</a>
+</div>
+
+<script>
+    // Simple script to toggle subscription button text locally on click
+    document.addEventListener('click', function(e) {
+        const btn = e.target.closest('.inline-sub-btn');
+        if (btn) {
+            // The actual AJAX is handled by base.html
+            // We just update the local UI optimistically
+            if(btn.classList.contains('subscribed')) {
+                // It was subscribed, now unsubscribing
+                btn.innerHTML = '<i class="fa-solid fa-plus"></i> Subscribe';
+            } else {
+                // It was not subscribed, now subscribing
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> Subscribed';
+            }
+        }
+    });
+</script>
+
+{% endblock %}

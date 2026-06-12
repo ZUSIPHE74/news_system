@@ -1,0 +1,67 @@
+{% extends 'news_app/base.html' %}
+{% block title %}Review: {{ article.title }} – NewsApp{% endblock %}
+{% block content %}
+
+<div style="max-width: 720px; margin: 0 auto;">
+    <a href="{% url 'editor_dashboard' %}" class="btn btn-ghost btn-sm fade-in"
+        style="margin-bottom: 24px; display: inline-flex;">← Back to Dashboard</a>
+
+    <div class="card fade-in">
+        <div class="card-meta">
+            <span class="status status-pending">Pending Review</span>
+            &nbsp;&nbsp;
+            <i class="fa-regular fa-calendar"></i> {{ article.date_posted|date:"d F Y, H:i" }}
+            &nbsp;·&nbsp; <i class="fa-solid fa-pen-nib"></i> {{ article.author.username }}
+            {% if article.publisher %}
+            &nbsp;·&nbsp; <i class="fa-solid fa-building"></i> {{ article.publisher.name }}
+            {% endif %}
+        </div>
+        <h1 style="font-size: 1.8rem; margin: 16px 0; line-height: 1.3;">{{ article.title }}</h1>
+        <div style="border-top: 1px solid var(--border); padding-top: 24px; color: var(--text); line-height: 1.9; font-size: 0.95rem; white-space: pre-wrap; margin-bottom: 32px;">
+            {{ article.content }}
+        </div>
+
+        <div style="border-top: 1px solid var(--glass-border); padding-top: 20px; margin-top: 20px;">
+            <form method="post" action="{% url 'change_status' article.pk %}" style="display: flex; align-items: center; gap: 16px; background: var(--glass); padding: 12px; border-radius: var(--radius-sm);">
+                {% csrf_token %}
+                <label style="font-weight: 600; font-size: 0.85rem; color: var(--text-muted); margin: 0;">Change Status:</label>
+                <select name="status" class="form-control" style="max-width: 200px; padding: 6px 12px;" onchange="this.form.submit()">
+                    {% for val, label in article.STATUS_CHOICES %}
+                        <option value="{{ val }}" {% if article.status == val %}selected{% endif %}>{{ label }}</option>
+                    {% endfor %}
+                </select>
+                <span style="font-size: 0.75rem; color: var(--text-dim);">(Auto-saves on change)</span>
+            </form>
+        </div>
+
+        <div class="action-row">
+            <form method="post" id="form-approve-detail">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="approve">
+                <button type="button" class="btn btn-success" onclick="confirmAction('form-approve-detail', 'approve',
+                        'Approve Article',
+                        'Approve this article? It will be published immediately and subscribers will be notified.')">
+                    <i class="fa-solid fa-circle-check"></i> Approve & Publish
+                </button>
+            </form>
+
+            <form method="post" id="form-reject-detail">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="reject">
+                <button type="button" class="btn btn-danger" onclick="confirmAction('form-reject-detail', 'reject',
+                        'Reject Article',
+                        'Reject this article? The journalist will be notified of the decision.')">
+                    <i class="fa-solid fa-circle-xmark"></i> Reject
+                </button>
+            </form>
+
+            <div style="flex:1;"></div>
+            <div style="display: flex; gap: 8px;">
+                <a href="{% url 'update_article' article.pk %}" class="btn btn-ghost"><i class="fa-solid fa-pen"></i> Edit</a>
+                <a href="{% url 'delete_article' article.pk %}" class="btn btn-danger" style="background: transparent; color: var(--danger);"><i class="fa-solid fa-trash"></i> Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

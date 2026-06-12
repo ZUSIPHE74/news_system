@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}NewsApp{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg-deep: #0a0e1a;
+            --bg-mid: #0f1525;
+            --glass: rgba(255,255,255,0.05);
+            --glass-border: rgba(255,255,255,0.10);
+            --glass-hover: rgba(255,255,255,0.09);
+            --blue: #2563eb;
+            --blue-glow: rgba(37,99,235,0.35);
+            --blue-light: #60a5fa;
+            --cyan: #06b6d4;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --text-dim: #64748b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --shadow: 0 8px 32px rgba(0,0,0,0.4);
+            --shadow-blue: 0 0 24px rgba(37,99,235,0.25);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-deep);
+            background-image:
+                radial-gradient(ellipse at 20% 20%, rgba(37,99,235,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 80%, rgba(6,182,212,0.08) 0%, transparent 60%);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* ── NAV ── */
+        nav {
+            background: rgba(15,21,37,0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0 24px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-left-container {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex: 1;
+        }
+        .nav-brand {
+            font-size: 1.25rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--blue-light), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+        .nav-links { display: flex; gap: 4px; }
+        .nav-link {
+            padding: 8px 14px;
+            border-radius: var(--radius-sm);
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .nav-link:hover { background: var(--glass); color: var(--text); }
+        .nav-right { display: flex; align-items: center; gap: 8px; }
+        .user-chip {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+        .avatar-sm {
+            width: 26px; height: 26px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.7rem; font-weight: 700; color: white;
+            overflow: hidden;
+        }
+        .avatar-sm img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Mobile Menu Button */
+        .mobile-menu-btn {
+            display: none;
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            padding: 8px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 1rem;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        .mobile-menu-btn:hover {
+            color: var(--text);
+            background: var(--glass-hover);
+        }
+
+        /* Mobile Menu Drawer */
+        .mobile-drawer {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            background: rgba(15,21,37,0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 999;
+            padding: 16px 24px;
+            display: none;
+            flex-direction: column;
+            gap: 8px;
+            transform: translateY(-10px);
+            opacity: 0;
+            transition: all 0.25s ease-out;
+        }
+        .mobile-drawer.active {
+            display: flex;
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .mobile-drawer .nav-link {
+            padding: 12px 16px;
+            font-size: 0.95rem;
+            width: 100%;
+        }
+
+        /* ── ACTION ROW ── */
+        .action-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* ── PAGE HEADER ── */
+        .page-header {
+            margin-bottom: 36px !important;
+        }
+
+        /* ── BUTTONS ── */
+        .btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 8px 16px; border-radius: var(--radius-sm);
+            font-size: 0.875rem; font-weight: 600;
+            cursor: pointer; border: none; text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--blue), #1d4ed8);
+            color: white;
+            box-shadow: var(--shadow-blue);
+        }
+        .btn-primary:hover { filter: brightness(1.15); transform: translateY(-1px); }
+        .btn-ghost {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            color: var(--text-muted);
+        }
+        .btn-ghost:hover { background: var(--glass-hover); color: var(--text); }
+        .btn-sm { padding: 6px 12px; font-size: 0.8rem; }
+        .btn-danger { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.3); color: #fca5a5; }
+        .btn-danger:hover { background: rgba(239,68,68,0.25); }
+        .btn-success { background: rgba(16,185,129,0.15); border: 1px solid rgba(16,185,129,0.3); color: #6ee7b7; }
+        .btn-success:hover { background: rgba(16,185,129,0.25); }
+
+        /* ── CONTAINER ── */
+        .container { max-width: 700px; margin: 28px auto; padding: 0 16px; }
+
+        /* ── CARD / POST ── */
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius);
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+        }
+        .card:hover {
+            border-color: rgba(96,165,250,0.25);
+            box-shadow: 0 4px 24px rgba(37,99,235,0.12);
+            transform: translateY(-2px);
+        }
+
+        /* ── POST HEADER ── */
+        .post-header { display: flex; align-items: center; margin-bottom: 14px; gap: 12px; }
+        .avatar {
+            width: 42px; height: 42px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 1rem; color: white;
+            overflow: hidden; flex-shrink: 0;
+            border: 2px solid rgba(96,165,250,0.3);
+        }
+        .avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .post-info .post-author {
+            font-weight: 700; font-size: 0.95rem;
+            color: var(--text); text-decoration: none;
+        }
+        .post-info .post-author:hover { color: var(--blue-light); }
+        .post-meta { font-size: 0.78rem; color: var(--text-dim); margin-top: 1px; }
+        .post-meta a { color: var(--text-muted); text-decoration: none; }
+        .post-meta a:hover { color: var(--blue-light); }
+
+        .post-title {
+            font-size: 1.2rem; font-weight: 700; color: var(--text);
+            display: block; text-decoration: none; margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        .post-title:hover { color: var(--blue-light); }
+        .post-excerpt { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+
+        .post-actions {
+            display: flex; border-top: 1px solid var(--glass-border);
+            margin-top: 16px; padding-top: 4px;
+        }
+        .post-action {
+            flex: 1; text-align: center; padding: 8px;
+            border-radius: var(--radius-sm);
+            color: var(--text-dim); font-weight: 600; font-size: 0.85rem;
+            text-decoration: none; transition: all 0.2s; cursor: pointer;
+        }
+        .post-action:hover { background: var(--glass-hover); color: var(--blue-light); }
+
+        /* ── VERIFIED BADGE ── */
+        .verified { color: var(--blue-light); font-size: 0.85rem; }
+
+        /* ── PROFILE PAGES ── */
+        .profile-header {
+            background: var(--glass);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .cover-photo {
+            height: 180px;
+            background: linear-gradient(135deg, #0f2460 0%, #1e40af 40%, #0891b2 100%);
+            position: relative;
+        }
+        .profile-info-bar {
+            display: flex; padding: 0 28px 20px;
+            align-items: flex-end; margin-top: -56px; gap: 20px; position: relative; z-index: 10;
+        }
+        .profile-avatar-lg {
+            width: 112px; height: 112px; border-radius: 50%;
+            border: 3px solid var(--bg-deep);
+            background: linear-gradient(135deg, var(--blue), var(--cyan));
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.5rem; font-weight: 800; color: white;
+            overflow: hidden; flex-shrink: 0;
+        }
+        .profile-avatar-lg img { width: 100%; height: 100%; object-fit: cover; }
+        .profile-name-sect { flex: 1; padding-bottom: 4px; }
+        .profile-name {
+            font-size: 1.75rem; font-weight: 800;
+            display: flex; align-items: center; gap: 8px;
+            color: var(--text);
+        }
+        .profile-subs { font-size: 0.875rem; color: var(--text-muted); margin-top: 4px; font-weight: 500; }
+
+        /* ── FORMS ── */
+        .form-group { margin-bottom: 18px; }
+        label { display: block; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); margin-bottom: 6px; }
+        input[type="text"], input[type="password"], input[type="email"], textarea, select {
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--glass-border);
+            color: var(--text);
+            border-radius: var(--radius-sm);
+            padding: 11px 14px;
+            font-family: inherit; font-size: 0.9rem;
+            outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+            resize: vertical;
+        }
+        input:focus, textarea:focus, select:focus {
+            border-color: var(--blue);
+            box-shadow: 0 0 0 3px var(--blue-glow);
+        }
+
+        /* ── STATUS ── */
+        .status {
+            display: inline-block; padding: 3px 10px; border-radius: 20px;
+            font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .status-approved { background: rgba(16,185,129,0.15); color: #6ee7b7; }
+        .status-pending { background: rgba(251,191,36,0.15); color: #fbbf24; }
+        .status-draft { background: rgba(100,116,139,0.15); color: var(--text-muted); }
+        .status-rejected { background: rgba(239,68,68,0.15); color: #fca5a5; }
+
+        /* ── STATS GRID ── */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 12px; margin-bottom: 24px; }
+        .stat-card {
+            background: var(--glass); border: 1px solid var(--glass-border);
+            border-radius: var(--radius); padding: 18px; text-align: center;
+            transition: border-color 0.2s;
+        }
+        .stat-card:hover { border-color: rgba(96,165,250,0.3); }
+        .stat-card .stat-number { font-size: 1.8rem; font-weight: 800; color: var(--blue-light); }
+        .stat-card .stat-label { font-size: 0.78rem; color: var(--text-dim); margin-top: 4px; font-weight: 500; }
+
+        /* ── ALERTS (for non-ajax pages) ── */
+        .alert {
+            padding: 12px 16px; border-radius: var(--radius-sm);
+            font-size: 0.875rem; margin-bottom: 16px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .alert-success { background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.3); color: #6ee7b7; }
+        .alert-error { background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.3); color: #fca5a5; }
+
+        /* ── TOAST NOTIFICATION ── */
+        #toast {
+            position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(80px);
+            background: rgba(15,21,37,0.92);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            color: var(--text); padding: 14px 24px;
+            border-radius: 50px; font-size: 0.9rem; font-weight: 600;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(96,165,250,0.2);
+            z-index: 9999;
+            transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), opacity 0.4s ease;
+            opacity: 0; white-space: nowrap;
+            display: flex; align-items: center; gap: 10px;
+        }
+        #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+        #toast .toast-icon { font-size: 1.1rem; }
+        #toast.toast-success { border-color: rgba(16,185,129,0.4); }
+        #toast.toast-error { border-color: rgba(239,68,68,0.4); }
+
+        /* ── SUBSCRIBE BTN ICON ── */
+        .sub-btn {
+            width: 28px; height: 28px; border-radius: 50%;
+            background: var(--blue);
+            color: white; border: none; cursor: pointer;
+            display: inline-flex; align-items: center; justify-content: center;
+            font-size: 1rem; font-weight: 700;
+            transition: all 0.2s; text-decoration: none;
+            box-shadow: 0 0 12px rgba(37,99,235,0.4);
+            flex-shrink: 0;
+        }
+        .sub-btn:hover { filter: brightness(1.2); transform: scale(1.12); }
+        .sub-btn.subscribed { background: rgba(16,185,129,0.2); border: 1px solid rgba(16,185,129,0.4); color: #6ee7b7; font-size: 0.85rem; }
+
+        /* ── SUGGESTIONS ── */
+        .suggestions-title {
+            font-weight: 700; color: var(--text-muted); margin: 24px 0 12px;
+            text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .suggestions-title::after {
+            content: ''; flex: 1; height: 1px; background: var(--glass-border);
+        }
+
+        /* ── MODAL / OVERLAY ── */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px); z-index: 2000;
+            display: none; align-items: center; justify-content: center;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal {
+            background: #111827; border: 1px solid var(--glass-border);
+            border-radius: var(--radius); padding: 28px; width: 100%;
+            max-width: 480px; margin: 24px;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            .profile-info-bar { flex-direction: column; align-items: center; text-align: center; }
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: inline-flex; }
+            .nav-right { gap: 4px; }
+            .user-chip span { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-left-container">
+            <a href="{% url 'home' %}" class="nav-brand">NewsApp</a>
+            <div class="nav-links">
+                {% if user.is_authenticated %}
+                    {% if user.role == 'reader' %}
+                        <a href="{% url 'reader_dashboard' %}" class="nav-link"><i class="fa-solid fa-chart-simple"></i> Dashboard</a>
+                    {% elif user.role == 'journalist' %}
+                        <a href="{% url 'journalist_dashboard' %}" class="nav-link"><i class="fa-regular fa-file-lines"></i> My Work</a>
+                        <a href="{% url 'submit_article' %}" class="nav-link"><i class="fa-solid fa-plus"></i> Submit</a>
+                        <a href="{% url 'edit_profile' %}" class="nav-link"><i class="fa-solid fa-pen"></i> Edit Profile</a>
+                    {% elif user.role == 'editor' %}
+                        <a href="{% url 'editor_dashboard' %}" class="nav-link"><i class="fa-solid fa-shield-halved"></i> Editor</a>
+                        <a href="{% url 'publisher_list' %}" class="nav-link"><i class="fa-solid fa-list"></i> View Publishers</a>
+                        <a href="{% url 'journalist_profile' user.pk %}" class="nav-link"><i class="fa-solid fa-user"></i> My Profile</a>
+                        {% if user.publisher %}
+                            <a href="{% url 'publisher_profile' user.publisher.pk %}" class="nav-link"><i class="fa-solid fa-building"></i> Publisher Profile</a>
+                        {% endif %}
+                        <a href="{% url 'edit_profile' %}" class="nav-link"><i class="fa-solid fa-pen"></i> Edit Profile</a>
+                    {% endif %}
+                    <a href="{% url 'newsletter_list' %}" class="nav-link"><i class="fa-regular fa-envelope"></i> Newsletters</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="nav-right">
+            {% if user.is_authenticated %}
+                <a href="{% url 'journalist_profile' user.pk %}" class="user-chip" style="text-decoration: none;">
+                    <div class="avatar-sm">
+                        {% if user.profile_picture %}
+                            <img src="{{ user.profile_picture.url }}" alt="">
+                        {% else %}
+                            {{ user.username|first|upper }}
+                        {% endif %}
+                    </div>
+                    <span>{{ user.username }}</span>
+                </a>
+                <a href="{% url 'logout' %}" class="btn btn-ghost btn-sm">Log Out</a>
+                <button class="mobile-menu-btn" id="mobile-toggle" aria-label="Toggle Navigation Menu"><i class="fa-solid fa-bars"></i></button>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-primary btn-sm">Log In</a>
+                <a href="{% url 'signup' %}" class="btn btn-ghost btn-sm">Sign Up</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <div class="mobile-drawer" id="mobile-drawer">
+        {% if user.is_authenticated %}
+            {% if user.role == 'reader' %}
+                <a href="{% url 'reader_dashboard' %}" class="nav-link"><i class="fa-solid fa-chart-simple"></i> Dashboard</a>
+            {% elif user.role == 'journalist' %}
+                <a href="{% url 'journalist_dashboard' %}" class="nav-link"><i class="fa-regular fa-file-lines"></i> My Work</a>
+                <a href="{% url 'submit_article' %}" class="nav-link"><i class="fa-solid fa-plus"></i> Submit</a>
+                <a href="{% url 'edit_profile' %}" class="nav-link"><i class="fa-solid fa-pen"></i> Edit Profile</a>
+            {% elif user.role == 'editor' %}
+                <a href="{% url 'editor_dashboard' %}" class="nav-link"><i class="fa-solid fa-shield-halved"></i> Editor</a>
+                <a href="{% url 'publisher_list' %}" class="nav-link"><i class="fa-solid fa-list"></i> View Publishers</a>
+                <a href="{% url 'journalist_profile' user.pk %}" class="nav-link"><i class="fa-solid fa-user"></i> My Profile</a>
+                {% if user.publisher %}
+                    <a href="{% url 'publisher_profile' user.publisher.pk %}" class="nav-link"><i class="fa-solid fa-building"></i> Publisher Profile</a>
+                {% endif %}
+                <a href="{% url 'edit_profile' %}" class="nav-link"><i class="fa-solid fa-pen"></i> Edit Profile</a>
+            {% endif %}
+            <a href="{% url 'newsletter_list' %}" class="nav-link"><i class="fa-regular fa-envelope"></i> Newsletters</a>
+        {% endif %}
+    </div>
+
+    <div class="container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags == 'error' %}alert-error{% else %}alert-success{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast">
+        <span class="toast-icon" id="toast-icon"></span>
+        <span id="toast-msg">Done!</span>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal-overlay" id="confirm-modal">
+        <div class="modal">
+            <h2 id="modal-title" style="margin-bottom: 12px; color: var(--text);">Confirm</h2>
+            <p id="modal-msg" style="color: var(--text-muted); margin-bottom: 24px; font-size: 0.9rem;"></p>
+            <div style="display: flex; gap: 12px; justify-content: flex-end;">
+                <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+                <button id="modal-confirm-btn" class="btn btn-primary">Proceed</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showToast(msg, type) {
+            const t = document.getElementById('toast');
+            document.getElementById('toast-msg').textContent = msg;
+            document.getElementById('toast-icon').innerHTML = type === 'success' ? '<i class="fa-solid fa-circle-check" style="color:#6ee7b7"></i>' : '<i class="fa-solid fa-circle-xmark" style="color:#fca5a5"></i>';
+            t.className = type === 'success' ? 'show toast-success' : 'show toast-error';
+            clearTimeout(window._toastTimer);
+            window._toastTimer = setTimeout(() => { t.className = ''; }, 4000);
+        }
+
+        function ajaxSubscribe(url, btnEl, subscribedText, unsubscribedText) {
+            fetch(url, {
+                method: 'POST',
+                headers: { 'X-CSRFToken': getCookie('csrftoken') }
+            })
+            .then(r => r.json())
+            .then(data => {
+                showToast(data.message, data.status === 'subscribed' ? 'success' : 'success');
+                if (btnEl) {
+                    if (data.status === 'subscribed') {
+                        btnEl.classList.add('subscribed');
+                        btnEl.title = 'Subscribed';
+                        btnEl.innerHTML = '<i class="fa-solid fa-check"></i>';
+                        btnEl.dataset.url = btnEl.dataset.unsubUrl;
+                        btnEl.dataset.action = 'unsub';
+                    } else {
+                        btnEl.classList.remove('subscribed');
+                        btnEl.title = 'Subscribe';
+                        btnEl.innerHTML = '<i class="fa-solid fa-plus"></i>';
+                        btnEl.dataset.url = btnEl.dataset.subUrl;
+                        btnEl.dataset.action = 'sub';
+                    }
+                }
+            })
+            .catch(() => showToast('Something went wrong.', 'error'));
+        }
+
+        document.addEventListener('click', function(e) {
+            const btn = e.target.closest('[data-subscribe]');
+            if (btn) {
+                e.preventDefault();
+                const url = btn.dataset.url;
+                ajaxSubscribe(url, btn);
+            }
+        });
+
+        function getCookie(name) {
+            let v = null;
+            if (document.cookie) {
+                document.cookie.split(';').forEach(c => {
+                    c = c.trim();
+                    if (c.startsWith(name + '=')) v = decodeURIComponent(c.slice(name.length + 1));
+                });
+            }
+            return v;
+        }
+
+        function confirmAction(formId, action, title, msg) {
+            const modal = document.getElementById('confirm-modal');
+            const titleEl = document.getElementById('modal-title');
+            const msgEl = document.getElementById('modal-msg');
+            const confirmBtn = document.getElementById('modal-confirm-btn');
+
+            titleEl.textContent = title;
+            msgEl.textContent = msg;
+            
+            confirmBtn.className = action === 'reject' ? 'btn btn-danger' : 'btn btn-primary';
+            confirmBtn.onclick = function() {
+                document.getElementById(formId).submit();
+            };
+
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('confirm-modal').classList.remove('active');
+        }
+
+        // Toggle mobile drawer menu
+        const toggle = document.getElementById('mobile-toggle');
+        const drawer = document.getElementById('mobile-drawer');
+        if (toggle && drawer) {
+            toggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                drawer.classList.toggle('active');
+                const icon = toggle.querySelector('i');
+                if (drawer.classList.contains('active')) {
+                    icon.className = 'fa-solid fa-xmark';
+                } else {
+                    icon.className = 'fa-solid fa-bars';
+                }
+            });
+            // Close menu if clicking outside
+            document.addEventListener('click', (e) => {
+                if (drawer.classList.contains('active') && !drawer.contains(e.target) && !toggle.contains(e.target)) {
+                    drawer.classList.remove('active');
+                    toggle.querySelector('i').className = 'fa-solid fa-bars';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

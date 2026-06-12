@@ -1,0 +1,128 @@
+{% extends 'news_app/base.html' %}
+{% block title %}Editor Dashboard – NewsApp{% endblock %}
+{% block content %}
+
+<div class="page-header fade-in"
+    style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;">
+    <div>
+        <h1>Editor Dashboard</h1>
+        <p>Review, approve, and manage articles across the system.</p>
+    </div>
+    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        {% if user.publisher %}
+            <a href="{% url 'publisher_profile' user.publisher.pk %}" class="btn btn-ghost btn-sm"><i class="fa-solid fa-building"></i> View My Publisher Profile</a>
+        {% endif %}
+        <a href="{% url 'publisher_list' %}" class="btn btn-ghost btn-sm"><i class="fa-solid fa-list"></i> View Publishers</a>
+        <a href="{% url 'publisher_create' %}" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Create Publisher</a>
+        <a href="{% url 'newsletter_create' %}" class="btn btn-primary btn-sm"><i class="fa-solid fa-plus"></i> Create Newsletter</a>
+        <a href="{% url 'newsletter_list' %}" class="btn btn-ghost btn-sm"><i class="fa-solid fa-envelope"></i> View Newsletters</a>
+    </div>
+</div>
+
+<div class="tabs" style="margin-bottom: 24px;">
+    <h2 style="font-size: 1.2rem; border-bottom: 2px solid var(--accent); display: inline-block; padding-bottom: 4px;">Pending Review ({{ pending_articles|length }})</h2>
+</div>
+
+{% if pending_articles %}
+{% for article in pending_articles %}
+<div class="card fade-in">
+    <div class="card-meta">
+        <i class="fa-regular fa-calendar"></i> {{ article.date_posted|date:"d M Y, H:i" }}
+        &nbsp;·&nbsp; <i class="fa-solid fa-pen-nib"></i> {{ article.author.username }}
+        {% if article.publisher %}
+        &nbsp;·&nbsp; <i class="fa-solid fa-building"></i> {{ article.publisher.name }}
+        {% endif %}
+        <span class="status status-pending" style="float:right;">Pending Review</span>
+    </div>
+
+    <h2>{{ article.title }}</h2>
+    <p class="card-excerpt">{{ article.content|truncatewords:50 }}</p>
+
+    <div class="action-row">
+        <a href="{% url 'approve_article' article.pk %}" class="btn btn-ghost btn-sm">Full Review →</a>
+        <div style="flex:1;"></div>
+
+        <form method="post" action="{% url 'approve_article' article.pk %}" id="form-approve-{{ article.pk }}">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="approve">
+            <button type="button" class="btn btn-success btn-sm"
+                onclick="confirmAction('form-approve-{{ article.pk }}', 'approve',
+                        'Approve Article',
+                        'Approve &quot;{{ article.title|escapejs }}&quot;? It will be published and subscribers notified.')">
+                <i class="fa-solid fa-circle-check"></i> Approve
+            </button>
+        </form>
+
+        <form method="post" action="{% url 'approve_article' article.pk %}" id="form-reject-{{ article.pk }}">
+            {% csrf_token %}
+            <input type="hidden" name="action" value="reject">
+            <button type="button" class="btn btn-danger btn-sm" onclick="confirmAction('form-reject-{{ article.pk }}', 'reject',
+                        'Reject Article',
+                        'Reject &quot;{{ article.title|escapejs }}&quot;? The journalist will be notified.')">
+                <i class="fa-solid fa-circle-xmark"></i> Reject
+            </button>
+        </form>
+    </div>
+</div>
+{% endfor %}
+{% else %}
+<div class="empty-state fade-in" style="margin-bottom: 40px;">
+    <div class="empty-icon"><i class="fa-solid fa-circle-check"></i></div>
+    <h3>All Caught Up!</h3>
+    <p>No articles are currently awaiting review.</p>
+</div>
+{% endif %}
+
+<div class="tabs" style="margin: 40px 0 24px 0;">
+    <h2 style="font-size: 1.2rem; border-bottom: 2px solid var(--text-dim); display: inline-block; padding-bottom: 4px;">All Articles</h2>
+</div>
+
+<div class="card fade-in" style="padding: 0; overflow: hidden;">
+    <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+        <thead style="background: var(--bg-card-hover); text-align: left;">
+            <tr>
+                <th style="padding: 12px 16px;">Title</th>
+                <th style="padding: 12px 16px;">Author</th>
+                <th style="padding: 12px 16px;">Status</th>
+                <th style="padding: 12px 16px;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for article in all_articles %}
+            <tr style="border-top: 1px solid var(--border);">
+                <td style="padding: 12px 16px; font-weight: 500;">{{ article.title }}</td>
+                <td style="padding: 12px 16px;">{{ article.author.username }}</td>
+                <td style="padding: 12px 16px;">
+                    <form method="post" action="{% url 'change_status' article.pk %}" style="margin: 0;">
+                        {% csrf_token %}
+                        <select name="status" onchange="this.form.submit()" 
+                            class="status-select status-{{ article.status }}"
+                            style="font-size: 0.75rem; padding: 4px 10px; border-radius: 20px; border: none; cursor: pointer; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">
+                            {% for val, label in article.STATUS_CHOICES %}
+                                <option value="{{ val }}" {% if article.status == val %}selected{% endif %} style="background: var(--bg-mid); color: var(--text);">{{ label }}</option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                </td>
+                <td style="padding: 12px 16px;">
+                    <div style="display: flex; gap: 8px;">
+                        <a href="{% url 'update_article' article.pk %}" class="btn btn-ghost btn-sm" style="padding: 4px 8px;"><i class="fa-solid fa-pen"></i></a>
+                        <a href="{% url 'delete_article' article.pk %}" class="btn btn-danger btn-sm" style="padding: 4px 8px; background: transparent; color: var(--danger); border: 1px solid var(--danger);"><i class="fa-solid fa-trash"></i></a>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .status-select { transition: all 0.2s; }
+    .status-select.status-approved { background: rgba(16,185,129,0.2); color: #6ee7b7; }
+    .status-select.status-pending { background: rgba(251,191,36,0.2); color: #fbbf24; }
+    .status-select.status-draft { background: rgba(148,163,184,0.15); color: #94a3b8; }
+    .status-select.status-rejected { background: rgba(239,68,68,0.2); color: #fca5a5; }
+    .status-select:hover { filter: brightness(1.2); }
+</style>
+
+{% endblock %}

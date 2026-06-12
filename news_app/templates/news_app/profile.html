@@ -1,0 +1,132 @@
+{% extends 'news_app/base.html' %}
+{% block title %}
+    {% if profile_user %}{{ profile_user.username }}{% else %}{{ publisher.name }}{% endif %} – NewsApp
+{% endblock %}
+
+{% block content %}
+<div class="profile-header">
+    <div class="cover-photo"></div>
+    <div class="profile-info-bar">
+        <div class="profile-avatar-lg">
+            {% if profile_user and profile_user.profile_picture %}
+                <img src="{{ profile_user.profile_picture.url }}" alt="">
+            {% elif profile_user %}
+                {{ profile_user.username|first|upper }}
+            {% else %}
+                <i class="fa-solid fa-building"></i>
+            {% endif %}
+        </div>
+        <div class="profile-name-sect">
+            <h1 class="profile-name">
+                {% if profile_user %}
+                    {{ profile_user.username }}
+                    {% if profile_user.is_verified %}<i class="fa-solid fa-circle-check verified" style="font-size:1.2rem;"></i>{% endif %}
+                {% else %}
+                    {{ publisher.name }}
+                    {% if publisher.is_verified %}<i class="fa-solid fa-circle-check verified" style="font-size:1.2rem;"></i>{% endif %}
+                {% endif %}
+            </h1>
+            <div class="profile-subs">
+                {% if profile_user and profile_user.role == 'journalist' and profile_user.publisher %}
+                    <a href="{% url 'publisher_profile' profile_user.publisher.pk %}" style="color:var(--blue-light); text-decoration:none; font-weight:600; margin-right:8px;">
+                        <i class="fa-solid fa-building"></i> {{ profile_user.publisher.name }}
+                    </a> ·
+                {% endif %}
+                <strong style="color:var(--blue-light);">{{ subscriber_count }}</strong> Subscribers ·
+                Member since
+                {% if profile_user %}{{ profile_user.date_joined|date:"M Y" }}{% else %}{{ publisher.date_created|date:"M Y" }}{% endif %}
+            </div>
+            {% if profile_user and profile_user.bio %}
+            <p style="margin-top:8px; font-size:0.875rem; color:var(--text-muted); max-width:480px;">{{ profile_user.bio }}</p>
+            {% endif %}
+            {% if publisher and publisher.website %}
+            <div style="margin-top:6px; font-size:0.875rem;">
+                <i class="fa-solid fa-globe"></i> <a href="{{ publisher.website }}" target="_blank" style="color:var(--blue-light); text-decoration:none;">{{ publisher.website }}</a>
+            </div>
+            {% endif %}
+        </div>
+        
+        {% if user.is_authenticated %}
+        <div style="padding-bottom:4px; display:flex; gap:10px;">
+            {% if profile_user %}
+                {% if profile_user == user %}
+                    <a href="{% url 'edit_profile' %}" class="btn btn-ghost btn-sm" style="border-radius:20px; padding:8px 16px;"><i class="fa-solid fa-pen"></i> Edit Profile</a>
+                {% elif user.role == 'reader' %}
+                    {% if profile_user in user.subscribed_journalists.all %}
+                    <button class="sub-btn subscribed"
+                        data-subscribe
+                        data-url="{% url 'unsubscribe_from_journalist' profile_user.pk %}"
+                        data-sub-url="{% url 'subscribe_to_journalist' profile_user.pk %}"
+                        data-unsub-url="{% url 'unsubscribe_from_journalist' profile_user.pk %}"
+                        title="Subscribed" style="width:auto; border-radius:20px; padding:8px 16px;">
+                        ✓ Subscribed
+                    </button>
+                    {% else %}
+                    <button class="btn btn-primary btn-sm"
+                        data-subscribe
+                        data-url="{% url 'subscribe_to_journalist' profile_user.pk %}"
+                        data-sub-url="{% url 'subscribe_to_journalist' profile_user.pk %}"
+                        data-unsub-url="{% url 'unsubscribe_from_journalist' profile_user.pk %}"
+                        style="border-radius:20px; padding:8px 16px;">
+                        + Subscribe
+                    </button>
+                    {% endif %}
+                {% endif %}
+            {% elif publisher %}
+                {% if user.role == 'editor' and user.publisher == publisher %}
+                    <a href="{% url 'publisher_edit' publisher.pk %}" class="btn btn-ghost btn-sm" style="border-radius:20px; padding:8px 16px;"><i class="fa-solid fa-pen"></i> Edit Publisher</a>
+                {% elif user.role == 'reader' %}
+                    {% if publisher in user.subscribed_publishers.all %}
+                    <button class="sub-btn subscribed"
+                        data-subscribe
+                        data-url="{% url 'unsubscribe_from_publisher' publisher.pk %}"
+                        data-sub-url="{% url 'subscribe_to_publisher' publisher.pk %}"
+                        data-unsub-url="{% url 'unsubscribe_from_publisher' publisher.pk %}"
+                        title="Subscribed" style="width:auto; border-radius:20px; padding:8px 16px;">
+                        ✓ Subscribed
+                    </button>
+                    {% else %}
+                    <button class="btn btn-primary btn-sm"
+                        data-subscribe
+                        data-url="{% url 'subscribe_to_publisher' publisher.pk %}"
+                        data-sub-url="{% url 'subscribe_to_publisher' publisher.pk %}"
+                        data-unsub-url="{% url 'unsubscribe_from_publisher' publisher.pk %}"
+                        style="border-radius:20px; padding:8px 16px;">
+                        + Subscribe
+                    </button>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% if is_journalist or publisher %}
+<div class="suggestions-title">
+    {% if profile_user %}
+        Articles by {{ profile_user.username }}
+    {% else %}
+        Published by {{ publisher.name }}
+    {% endif %}
+</div>
+
+{% if articles %}
+    {% for article in articles %}
+    <div class="card">
+        <div class="post-meta" style="margin-bottom:8px;">{{ article.date_posted|date:"d M Y" }}</div>
+        <a href="{% url 'article_detail' article.pk %}" class="post-title">{{ article.title }}</a>
+        <p class="post-excerpt" style="margin-top:8px;">{{ article.content|truncatewords:40 }}</p>
+        <div class="post-actions">
+            <a href="{% url 'article_detail' article.pk %}" class="post-action"><i class="fa-solid fa-book-open"></i> Read More</a>
+        </div>
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="card" style="text-align:center; padding:40px;">
+        <h3 style="color:var(--text-muted);">No publications yet.</h3>
+    </div>
+{% endif %}
+{% endif %}
+
+{% endblock %}

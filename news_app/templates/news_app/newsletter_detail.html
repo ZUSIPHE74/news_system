@@ -1,0 +1,63 @@
+{% extends 'news_app/base.html' %}
+{% block title %}{{ newsletter.title }} – NewsApp{% endblock %}
+{% block content %}
+
+<div style="max-width: 800px; margin: 0 auto;">
+    <div class="post" style="padding:0;">
+        <div style="padding:32px; text-align:center; border-bottom:1px solid var(--fb-border);">
+            <div class="post-meta" style="justify-content:center; margin-bottom:12px;">
+                <i class="fa-regular fa-calendar"></i> {{ newsletter.date_posted|date:"d M Y" }} · <i class="fa-solid fa-pen-nib"></i> {{ newsletter.author.username }}
+                {% if newsletter.publisher %}
+                · <i class="fa-solid fa-building"></i> {{ newsletter.publisher.name }}
+                {% endif %}
+            </div>
+            <h1 style="font-size:2.2rem; font-weight:800; margin-bottom:16px;">{{ newsletter.title }}</h1>
+            {% if user.role == 'editor' or user.is_staff or newsletter.author == user %}
+                {% if user.role == 'editor' or user.is_staff %}
+                    {% if not newsletter.publisher or not user.publisher or user.publisher == newsletter.publisher %}
+                        <div style="display: flex; gap: 12px; justify-content: center; margin-top: 16px;">
+                            <a href="{% url 'newsletter_update' newsletter.pk %}" class="btn btn-ghost btn-sm" style="padding: 4px 12px;"><i class="fa-solid fa-pen"></i> Edit</a>
+                            <a href="{% url 'newsletter_delete' newsletter.pk %}" class="btn btn-danger btn-sm" style="padding: 4px 12px; background: transparent; color: var(--danger); border: 1px solid var(--danger);"><i class="fa-solid fa-trash"></i> Delete</a>
+                        </div>
+                    {% endif %}
+                {% elif newsletter.author == user %}
+                    <div style="display: flex; gap: 12px; justify-content: center; margin-top: 16px;">
+                        <a href="{% url 'newsletter_update' newsletter.pk %}" class="btn btn-ghost btn-sm" style="padding: 4px 12px;"><i class="fa-solid fa-pen"></i> Edit</a>
+                        <a href="{% url 'newsletter_delete' newsletter.pk %}" class="btn btn-danger btn-sm" style="padding: 4px 12px; background: transparent; color: var(--danger); border: 1px solid var(--danger);"><i class="fa-solid fa-trash"></i> Delete</a>
+                    </div>
+                {% endif %}
+            {% endif %}
+        </div>
+
+        <div style="padding:32px; font-size:1.1rem; line-height:1.8; color:var(--fb-text);">
+            {{ newsletter.content|linebreaks }}
+        </div>
+    </div>
+
+    <h2 class="suggestions-title">Featured Articles</h2>
+    
+    {% if newsletter.articles.all %}
+        {% for article in newsletter.articles.all %}
+        <div class="post" style="padding:16px;">
+            <div class="post-meta">
+                <i class="fa-solid fa-pen-nib"></i> {{ article.author.username }} · <i class="fa-regular fa-calendar"></i> {{ article.date_posted|date:"d M Y" }}
+            </div>
+            <a href="{% url 'article_detail' article.pk %}" class="post-title" style="font-size:1.2rem; margin-top:8px;">{{ article.title }}</a>
+            <p style="font-size:0.95rem; color:var(--fb-text); margin-top:8px;">{{ article.content|truncatewords:40 }}</p>
+            <div style="margin-top:16px; border-top:1px solid var(--glass-border); padding-top:12px;">
+                <a href="{% url 'article_detail' article.pk %}" class="btn btn-ghost btn-sm">Read Full Article</a>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="post" style="text-align:center; padding:20px; color:var(--fb-text-muted); font-style:italic;">
+            No specific articles were linked to this newsletter.
+        </div>
+    {% endif %}
+
+    <div style="margin-top: 32px; text-align: center; margin-bottom:40px;">
+        <a href="{% url 'newsletter_list' %}" class="btn btn-ghost">← Back to Newsletters</a>
+    </div>
+</div>
+
+{% endblock %}

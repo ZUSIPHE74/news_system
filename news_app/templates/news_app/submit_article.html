@@ -1,0 +1,60 @@
+{% extends 'news_app/base.html' %}
+{% block title %}Submit Article - NewsApp{% endblock %}
+{% block content %}
+
+<div style="max-width: 680px; margin: 0 auto;">
+    <div class="page-header fade-in">
+        <h1>Submit Article</h1>
+        <p>Write and submit your article for editorial review.</p>
+    </div>
+
+    <div class="form-card fade-in">
+        <form method="post" enctype="multipart/form-data" class="article-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.title.id_for_label }}">Article Title</label>
+                {{ form.title }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.image.id_for_label }}">Article Image (Optional)</label>
+                {{ form.image }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.content.id_for_label }}">Article Content</label>
+                {{ form.content }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.poster_type.id_for_label }}">Post As</label>
+                {{ form.poster_type }}
+            </div>
+
+            <div style="display: flex; gap: 12px; justify-content: flex-end; padding-top: 8px;">
+                <a href="{% url 'journalist_dashboard' %}" class="btn btn-ghost">Cancel</a>
+                <button type="submit" class="btn btn-primary">Submit for Review →</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    const titleInput = document.getElementById('{{ form.title.id_for_label }}');
+    const contentInput = document.getElementById('{{ form.content.id_for_label }}');
+
+    function updateCounter(el, maxLen) {
+        const len = el.value.length;
+        let info = el.nextElementSibling;
+        if (!info || !info.classList.contains('char-count')) {
+            info = document.createElement('small');
+            info.className = 'char-count';
+            info.style.cssText = 'color: var(--text-muted); font-size: 0.75rem; display: block; text-align: right; margin-top: 4px;';
+            el.after(info);
+        }
+        if (maxLen) info.textContent = `${len}/${maxLen}`;
+        else info.textContent = `${len} characters`;
+    }
+
+    titleInput.addEventListener('input', () => updateCounter(titleInput, 255));
+    contentInput.addEventListener('input', () => updateCounter(contentInput, null));
+</script>
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'news_app/base.html' %}
+{% block title %}Update Article – NewsApp{% endblock %}
+{% block content %}
+
+<div class="page-header fade-in">
+    <h1>Update Article</h1>
+    <p>Modify the details of article: <strong>{{ article.title }}</strong></p>
+</div>
+
+<div class="card fade-in" style="max-width: 800px; margin: 0 auto;">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="form-group" style="margin-bottom: 20px;">
+            <label for="{{ form.title.id_for_label }}" style="display: block; margin-bottom: 8px; font-weight: 500;">Title</label>
+            {{ form.title }}
+        </div>
+
+        <div class="form-group" style="margin-bottom: 20px;">
+            <label for="{{ form.image.id_for_label }}" style="display: block; margin-bottom: 8px; font-weight: 500;">Image (Optional)</label>
+            {{ form.image }}
+        </div>
+
+        <div class="form-group" style="margin-bottom: 20px;">
+            <label for="{{ form.content.id_for_label }}" style="display: block; margin-bottom: 8px; font-weight: 500;">Content</label>
+            {{ form.content }}
+        </div>
+
+        {% if form.status %}
+        <div class="form-group" style="margin-bottom: 24px;">
+            <label for="{{ form.status.id_for_label }}" style="display: block; margin-bottom: 8px; font-weight: 500;">Status</label>
+            {{ form.status }}
+        </div>
+        {% endif %}
+
+        {% if form.poster_type %}
+        <div class="form-group" style="margin-bottom: 24px;">
+            <label for="{{ form.poster_type.id_for_label }}" style="display: block; margin-bottom: 8px; font-weight: 500;">Poster Type</label>
+            {{ form.poster_type }}
+        </div>
+        {% endif %}
+
+        {% if form.publisher %}
+        <div class="form-group" style="margin-bottom: 24px;">
+            <label for="{{ form.publisher.id_for_label }}" style="display: block; margin-bottom: 8px; font-weight: 500;">Publisher (Branding)</label>
+            {{ form.publisher }}
+        </div>
+        {% endif %}
+
+        <div class="form-actions" style="display: flex; gap: 12px; border-top: 1px solid var(--border); padding-top: 24px;">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            {% if user.role == 'journalist' %}
+                <a href="{% url 'journalist_dashboard' %}" class="btn btn-ghost">Cancel</a>
+            {% else %}
+                <a href="{% url 'editor_dashboard' %}" class="btn btn-ghost">Cancel</a>
+            {% endif %}
+        </div>
+    </form>
+</div>
+
+{% endblock %}

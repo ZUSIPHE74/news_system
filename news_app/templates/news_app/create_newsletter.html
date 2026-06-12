@@ -1,0 +1,65 @@
+{% extends 'news_app/base.html' %}
+{% block title %}Create Newsletter - NewsApp{% endblock %}
+{% block content %}
+
+<div style="max-width: 800px; margin: 40px auto;">
+    <div class="page-header fade-in">
+        <h1>Create Newsletter</h1>
+        <p>Curate approved articles and share them in a newsletter.</p>
+    </div>
+
+    <div class="form-card fade-in">
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>
+                {{ form.title }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.content.id_for_label }}">{{ form.content.label }}</label>
+                {{ form.content }}
+            </div>
+            
+            <div class="form-group">
+                <label>Select Articles to Include</label>
+                <div style="background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 16px; max-height: 400px; overflow-y: auto;">
+                    {% if form.fields.articles.queryset %}
+                        <div style="display: grid; grid-template-columns: 1fr; gap: 12px;">
+                            {% for choice in form.articles %}
+                                <label style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer; padding: 12px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; transition: border-color 0.2s;">
+                                    <div style="margin-top: 4px;">{{ choice.tag }}</div>
+                                    <div style="flex: 1;">
+                                        <div style="font-weight: 600; color: var(--text);">{{ choice.choice_label }}</div>
+                                    </div>
+                                </label>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p style="text-align: center; padding: 20px;">No approved articles available for this publisher.</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 12px; justify-content: flex-end; padding-top: 16px;">
+                {% if user.role == 'journalist' %}
+                    <a href="{% url 'journalist_dashboard' %}" class="btn btn-ghost">Cancel</a>
+                {% else %}
+                    <a href="{% url 'editor_dashboard' %}" class="btn btn-ghost">Cancel</a>
+                {% endif %}
+                <button type="submit" class="btn btn-primary">Create Newsletter</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    /* Styling for the checkbox custom labels */
+    .form-group input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        accent-color: var(--accent);
+        cursor: pointer;
+    }
+</style>
+
+{% endblock %}

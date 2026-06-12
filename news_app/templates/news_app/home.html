@@ -1,0 +1,45 @@
+{% extends 'news_app/base.html' %}
+{% block title %}Feed – NewsApp{% endblock %}
+{% block content %}
+
+{% if articles %}
+    {% for article in articles %}
+    <div class="card">
+        <div class="post-header">
+            <a href="{% url 'journalist_profile' article.author.pk %}" class="avatar" style="text-decoration: none;">
+                {% if article.author.profile_picture %}
+                    <img src="{{ article.author.profile_picture.url }}" alt="">
+                {% else %}
+                    {{ article.author.username|first|upper }}
+                {% endif %}
+            </a>
+            <div class="post-info">
+                <a href="{% url 'journalist_profile' article.author.pk %}" class="post-author">
+                    {{ article.author.username }}{% if article.author.is_verified %} <i class="fa-solid fa-circle-check verified" style="font-size:0.8rem;"></i>{% endif %}
+                </a>
+                <div class="post-meta">
+                    {{ article.date_posted|date:"d M Y" }}
+                    {% if article.publisher %}
+                    · <a href="{% url 'publisher_profile' article.publisher.pk %}">{{ article.publisher.name }}</a>{% if article.publisher.is_verified %} <i class="fa-solid fa-circle-check verified" style="font-size:0.8rem;"></i>{% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <a href="{% url 'article_detail' article.pk %}" class="post-title">{{ article.title }}</a>
+        <p class="post-excerpt">{{ article.content|truncatewords:40 }}</p>
+
+        <div class="post-actions">
+            <a href="{% url 'article_detail' article.pk %}" class="post-action"><i class="fa-solid fa-book-open"></i> Read More</a>
+        </div>
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="card" style="text-align:center; padding:60px 20px;">
+        <div style="font-size:3rem; margin-bottom:16px; color: var(--blue-light);"><i class="fa-regular fa-newspaper"></i></div>
+        <h3 style="color:var(--text-muted);">No articles yet.</h3>
+        <p style="color:var(--text-dim); margin-top:8px;">Check back soon — journalists are working on new content.</p>
+    </div>
+{% endif %}
+
+{% endblock %}

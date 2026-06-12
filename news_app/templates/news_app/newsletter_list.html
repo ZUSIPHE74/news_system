@@ -1,0 +1,53 @@
+{% extends 'news_app/base.html' %}
+{% block title %}Newsletters – NewsApp{% endblock %}
+{% block content %}
+
+<div class="page-header fade-in" style="display:flex; align-items:center; justify-content:space-between; margin-bottom: 20px;">
+    <div>
+        <h1 style="font-size:1.8rem; font-weight:800;">Newsletters</h1>
+        <p style="color:var(--text-muted);">Browse through curated news collections.</p>
+    </div>
+    {% if user.role == 'journalist' or user.role == 'editor' %}
+    <a href="{% url 'newsletter_create' %}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Create</a>
+    {% endif %}
+</div>
+
+{% if newsletters %}
+<div class="fade-in" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px;">
+    {% for newsletter in newsletters %}
+    <div class="card" style="display: flex; flex-direction: column; justify-content: space-between; padding:16px;">
+        <div>
+            <div class="post-meta" style="margin-bottom:8px;">
+                <i class="fa-regular fa-calendar"></i> {{ newsletter.date_posted|date:"d M Y" }}
+                {% if newsletter.publisher %}
+                · <i class="fa-regular fa-building"></i> {{ newsletter.publisher.name }}
+                {% endif %}
+            </div>
+            <h2 style="font-size:1.25rem; margin-bottom:8px;">{{ newsletter.title }}</h2>
+            <p style="font-size:0.95rem; color:var(--text); margin-bottom:12px;">{{ newsletter.content|truncatewords:20 }}</p>
+            <div style="font-size: 0.85rem; color: var(--blue-light); font-weight:600;">
+                <i class="fa-solid fa-layer-group"></i> {{ newsletter.articles.count }} articles included
+            </div>
+        </div>
+        <div style="margin-top: 16px; border-top:1px solid var(--glass-border); padding-top:8px;">
+            <a href="{% url 'newsletter_detail' newsletter.pk %}" class="btn btn-ghost" style="width: 100%; justify-content: center;">View Newsletter →</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="card fade-in" style="text-align:center; padding:60px;">
+    <div style="font-size:3rem; margin-bottom:16px; color: var(--blue-light);"><i class="fa-regular fa-envelope-open"></i></div>
+    <h3 style="color:var(--text-muted);">No newsletters available.</h3>
+</div>
+{% endif %}
+
+<div style="margin-top: 24px;">
+    {% if user.role == 'editor' %}
+    <a href="{% url 'editor_dashboard' %}" class="btn btn-ghost">← Back</a>
+    {% elif user.role == 'journalist' %}
+    <a href="{% url 'journalist_dashboard' %}" class="btn btn-ghost">← Back</a>
+    {% endif %}
+</div>
+
+{% endblock %}

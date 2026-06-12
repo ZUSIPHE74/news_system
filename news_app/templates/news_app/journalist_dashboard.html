@@ -1,0 +1,58 @@
+{% extends 'news_app/base.html' %}
+{% block title %}My Articles – NewsApp{% endblock %}
+{% block content %}
+
+<div class="page-header fade-in"
+    style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;">
+    <div>
+        <h1>Journalist Dashboard</h1>
+        <p>Manage your articles and curate newsletters.</p>
+    </div>
+    <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="{% url 'newsletter_list' %}" class="btn btn-ghost"><i class="fa-solid fa-envelopes-bulk"></i> View Newsletters</a>
+        <a href="{% url 'newsletter_create' %}" class="btn btn-ghost"><i class="fa-solid fa-plus-minus"></i> Create Newsletter</a>
+        <a href="{% url 'submit_article' %}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Submit New Article</a>
+    </div>
+</div>
+
+<div class="stats-grid fade-in">
+    <div class="stat-card">
+        <div class="stat-number">{{ articles|length }}</div>
+        <div class="stat-label">Total Articles</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number" style="color: var(--success);">{{ articles|dictsort:"status"|length }}</div>
+        <div class="stat-label">Published</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number" style="color: var(--warning);">—</div>
+        <div class="stat-label">Awaiting Review</div>
+    </div>
+</div>
+
+{% if articles %}
+{% for article in articles %}
+<div class="card fade-in">
+    <div class="card-meta">
+        <i class="fa-regular fa-calendar"></i> {{ article.date_posted|date:"d M Y" }}
+        <span class="status status-{{ article.status }}" style="margin-left: 8px;">{{ article.status }}</span>
+    </div>
+    <h2>{{ article.title }}</h2>
+    <p class="card-excerpt">{{ article.content|truncatewords:30 }}</p>
+    <div class="action-row" style="margin-top: 16px; display: flex; gap: 8px; border-top: 1px solid var(--border); padding-top: 12px;">
+        <a href="{% url 'update_article' article.pk %}" class="btn btn-ghost btn-sm" style="padding: 4px 8px;"><i class="fa-solid fa-pen"></i> Edit</a>
+        <a href="{% url 'delete_article' article.pk %}" class="btn btn-danger btn-sm" style="padding: 4px 8px; background: transparent; color: var(--danger); border: 1px solid var(--danger);"><i class="fa-solid fa-trash"></i> Delete</a>
+    </div>
+</div>
+{% endfor %}
+{% else %}
+<div class="empty-state fade-in">
+    <div class="empty-icon"><i class="fa-solid fa-pen-nib"></i></div>
+    <h3>No Articles Yet</h3>
+    <p>Start by submitting your first article for editor review.</p>
+    <br>
+    <a href="{% url 'submit_article' %}" class="btn btn-primary">Submit Article</a>
+</div>
+{% endif %}
+
+{% endblock %}
