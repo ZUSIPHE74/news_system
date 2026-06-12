@@ -161,6 +161,7 @@ class Article(models.Model):
 class Newsletter(models.Model):
     """
     A collection of articles curated for a publisher's subscribers.
+    Integrates many-to-many relationship with approved publisher articles.
     """
 
     title = models.CharField(max_length=255)
