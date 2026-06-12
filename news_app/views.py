@@ -520,6 +520,7 @@ def newsletter_create(request):
 def newsletter_update(request, pk):
     """
     Allow journalists (authors) and editors to update newsletters.
+    Restricts access so that editors can only edit within their own publisher.
     """
     newsletter = get_object_or_404(Newsletter, pk=pk)
 
