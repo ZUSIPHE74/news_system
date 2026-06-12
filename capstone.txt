@@ -1,3 +1,3 @@
 # Capstone Project GitHub Repository Link
 # Replace the placeholder URL below with your public remote Git repository URL:
-https://github.com/Zusiphe/news_system
+https://github.com/ZUSIPHE74/news_system.git
