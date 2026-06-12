@@ -114,6 +114,32 @@ python manage.py migrate
 python manage.py runserver
 ```
 
+### 8. Run with Docker
+
+You can containerize and run the application using Docker:
+
+#### Build the Docker Image:
+```bash
+docker build -t news_system .
+```
+
+#### Run the Docker Container:
+```bash
+docker run -p 8000:8000 --env-file .env news_system
+```
+
+---
+
+## Secrets & Environment Variables
+
+To run this application securely, secrets are kept in a local `.env` file (which is ignored by Git):
+1. Copy the template `.env.example` to `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+2. Configure your database connection credentials (`DB_NAME`, `DB_USER`, `DB_PASSWORD`, `DB_HOST`, `DB_PORT`) in `.env`.
+3. Never commit `.env` or any secret files to your public repositories.
+
 ## Usage
 
 1. Open `http://127.0.0.1:8000/` in your browser.
