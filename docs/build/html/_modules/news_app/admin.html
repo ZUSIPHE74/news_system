@@ -40,8 +40,22 @@
 <div class="viewcode-block" id="UserAdmin">
 <a class="viewcode-back" href="../../news_app.html#news_app.admin.UserAdmin">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">UserAdmin</span><span class="p">(</span><span class="n">BaseUserAdmin</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Custom admin for User model to display role and publisher information.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">fieldsets</span> <span class="o">=</span> <span class="n">BaseUserAdmin</span><span class="o">.</span><span class="n">fieldsets</span> <span class="o">+</span> <span class="p">(</span>
-        <span class="p">(</span><span class="s1">&#39;Role &amp; Publisher&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;fields&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;role&#39;</span><span class="p">,</span> <span class="s1">&#39;publisher&#39;</span><span class="p">,</span> <span class="s1">&#39;subscribed_publishers&#39;</span><span class="p">,</span> <span class="s1">&#39;subscribed_journalists&#39;</span><span class="p">)}),</span>
+        <span class="p">(</span>
+            <span class="s2">&quot;Role &amp; Publisher&quot;</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;fields&quot;</span><span class="p">:</span> <span class="p">(</span>
+                    <span class="s2">&quot;role&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;publisher&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;subscribed_publishers&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;subscribed_journalists&quot;</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">},</span>
+        <span class="p">),</span>
     <span class="p">)</span></div>
 
 
@@ -55,7 +69,11 @@
 <div class="viewcode-block" id="setup_groups">
 <a class="viewcode-back" href="../../news_app.html#news_app.admin.setup_groups">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">setup_groups</span><span class="p">(</span><span class="n">modeladmin</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">queryset</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Admin action to manually trigger group and permission creation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">create_groups_and_permissions</span><span class="p">()</span></div>
+
 
 
 <span class="n">setup_groups</span><span class="o">.</span><span class="n">short_description</span> <span class="o">=</span> <span class="s2">&quot;Setup groups and permissions&quot;</span>

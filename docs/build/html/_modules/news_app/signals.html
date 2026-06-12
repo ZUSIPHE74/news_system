@@ -47,19 +47,39 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create role groups and attach the expected article permissions.&quot;&quot;&quot;</span>
     <span class="n">article_ct</span> <span class="o">=</span> <span class="n">ContentType</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get_for_model</span><span class="p">(</span><span class="n">Article</span><span class="p">)</span>
 
-    <span class="n">view_article</span> <span class="o">=</span> <span class="n">Permission</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get_or_create</span><span class="p">(</span><span class="n">codename</span><span class="o">=</span><span class="s1">&#39;view_article&#39;</span><span class="p">,</span> <span class="n">content_type</span><span class="o">=</span><span class="n">article_ct</span><span class="p">,</span> <span class="n">defaults</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Can view article&#39;</span><span class="p">})[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">add_article</span> <span class="o">=</span> <span class="n">Permission</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get_or_create</span><span class="p">(</span><span class="n">codename</span><span class="o">=</span><span class="s1">&#39;add_article&#39;</span><span class="p">,</span> <span class="n">content_type</span><span class="o">=</span><span class="n">article_ct</span><span class="p">,</span> <span class="n">defaults</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Can add article&#39;</span><span class="p">})[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">change_article</span> <span class="o">=</span> <span class="n">Permission</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get_or_create</span><span class="p">(</span><span class="n">codename</span><span class="o">=</span><span class="s1">&#39;change_article&#39;</span><span class="p">,</span> <span class="n">content_type</span><span class="o">=</span><span class="n">article_ct</span><span class="p">,</span> <span class="n">defaults</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Can change article&#39;</span><span class="p">})[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">delete_article</span> <span class="o">=</span> <span class="n">Permission</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get_or_create</span><span class="p">(</span><span class="n">codename</span><span class="o">=</span><span class="s1">&#39;delete_article&#39;</span><span class="p">,</span> <span class="n">content_type</span><span class="o">=</span><span class="n">article_ct</span><span class="p">,</span> <span class="n">defaults</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Can delete article&#39;</span><span class="p">})[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">view_article</span> <span class="o">=</span> <span class="n">Permission</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get_or_create</span><span class="p">(</span>
+        <span class="n">codename</span><span class="o">=</span><span class="s2">&quot;view_article&quot;</span><span class="p">,</span>
+        <span class="n">content_type</span><span class="o">=</span><span class="n">article_ct</span><span class="p">,</span>
+        <span class="n">defaults</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Can view article&quot;</span><span class="p">},</span>
+    <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">add_article</span> <span class="o">=</span> <span class="n">Permission</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get_or_create</span><span class="p">(</span>
+        <span class="n">codename</span><span class="o">=</span><span class="s2">&quot;add_article&quot;</span><span class="p">,</span>
+        <span class="n">content_type</span><span class="o">=</span><span class="n">article_ct</span><span class="p">,</span>
+        <span class="n">defaults</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Can add article&quot;</span><span class="p">},</span>
+    <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">change_article</span> <span class="o">=</span> <span class="n">Permission</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get_or_create</span><span class="p">(</span>
+        <span class="n">codename</span><span class="o">=</span><span class="s2">&quot;change_article&quot;</span><span class="p">,</span>
+        <span class="n">content_type</span><span class="o">=</span><span class="n">article_ct</span><span class="p">,</span>
+        <span class="n">defaults</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Can change article&quot;</span><span class="p">},</span>
+    <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">delete_article</span> <span class="o">=</span> <span class="n">Permission</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get_or_create</span><span class="p">(</span>
+        <span class="n">codename</span><span class="o">=</span><span class="s2">&quot;delete_article&quot;</span><span class="p">,</span>
+        <span class="n">content_type</span><span class="o">=</span><span class="n">article_ct</span><span class="p">,</span>
+        <span class="n">defaults</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Can delete article&quot;</span><span class="p">},</span>
+    <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
-    <span class="n">reader_group</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">Group</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get_or_create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Reader&#39;</span><span class="p">)</span>
+    <span class="n">reader_group</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">Group</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get_or_create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Reader&quot;</span><span class="p">)</span>
     <span class="n">reader_group</span><span class="o">.</span><span class="n">permissions</span><span class="o">.</span><span class="n">set</span><span class="p">([</span><span class="n">view_article</span><span class="p">])</span>
 
-    <span class="n">editor_group</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">Group</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get_or_create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Editor&#39;</span><span class="p">)</span>
-    <span class="n">editor_group</span><span class="o">.</span><span class="n">permissions</span><span class="o">.</span><span class="n">set</span><span class="p">([</span><span class="n">view_article</span><span class="p">,</span> <span class="n">change_article</span><span class="p">,</span> <span class="n">delete_article</span><span class="p">])</span>
+    <span class="n">editor_group</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">Group</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get_or_create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Editor&quot;</span><span class="p">)</span>
+    <span class="n">editor_group</span><span class="o">.</span><span class="n">permissions</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">view_article</span><span class="p">,</span> <span class="n">change_article</span><span class="p">,</span> <span class="n">delete_article</span><span class="p">]</span>
+    <span class="p">)</span>
 
-    <span class="n">journalist_group</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">Group</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get_or_create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Journalist&#39;</span><span class="p">)</span>
-    <span class="n">journalist_group</span><span class="o">.</span><span class="n">permissions</span><span class="o">.</span><span class="n">set</span><span class="p">([</span><span class="n">view_article</span><span class="p">,</span> <span class="n">add_article</span><span class="p">,</span> <span class="n">change_article</span><span class="p">,</span> <span class="n">delete_article</span><span class="p">])</span></div>
+    <span class="n">journalist_group</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">Group</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get_or_create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Journalist&quot;</span><span class="p">)</span>
+    <span class="n">journalist_group</span><span class="o">.</span><span class="n">permissions</span><span class="o">.</span><span class="n">set</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">view_article</span><span class="p">,</span> <span class="n">add_article</span><span class="p">,</span> <span class="n">change_article</span><span class="p">,</span> <span class="n">delete_article</span><span class="p">]</span>
+    <span class="p">)</span></div>
 
 
 
@@ -68,7 +88,7 @@
 <span class="nd">@receiver</span><span class="p">(</span><span class="n">post_migrate</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">ensure_groups_after_migrate</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Automatically create/update role groups and permissions after migrations.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">sender</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;news_app&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">sender</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;news_app&quot;</span><span class="p">:</span>
         <span class="n">create_groups_and_permissions</span><span class="p">()</span></div>
 
 
@@ -79,9 +99,9 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">assign_user_to_group</span><span class="p">(</span><span class="n">sender</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">created</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Keep Django auth groups synchronized with the user&#39;s selected role.&quot;&quot;&quot;</span>
     <span class="n">group_map</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="n">User</span><span class="o">.</span><span class="n">READER</span><span class="p">:</span> <span class="s1">&#39;Reader&#39;</span><span class="p">,</span>
-        <span class="n">User</span><span class="o">.</span><span class="n">EDITOR</span><span class="p">:</span> <span class="s1">&#39;Editor&#39;</span><span class="p">,</span>
-        <span class="n">User</span><span class="o">.</span><span class="n">JOURNALIST</span><span class="p">:</span> <span class="s1">&#39;Journalist&#39;</span><span class="p">,</span>
+        <span class="n">User</span><span class="o">.</span><span class="n">READER</span><span class="p">:</span> <span class="s2">&quot;Reader&quot;</span><span class="p">,</span>
+        <span class="n">User</span><span class="o">.</span><span class="n">EDITOR</span><span class="p">:</span> <span class="s2">&quot;Editor&quot;</span><span class="p">,</span>
+        <span class="n">User</span><span class="o">.</span><span class="n">JOURNALIST</span><span class="p">:</span> <span class="s2">&quot;Journalist&quot;</span><span class="p">,</span>
     <span class="p">}</span>
     <span class="n">group_name</span> <span class="o">=</span> <span class="n">group_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">instance</span><span class="o">.</span><span class="n">role</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">group_name</span><span class="p">:</span>
@@ -109,7 +129,7 @@
             <span class="k">if</span> <span class="n">reader</span><span class="o">.</span><span class="n">email</span><span class="p">:</span>
                 <span class="n">subscriber_emails</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">reader</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
 
-    <span class="k">for</span> <span class="n">reader</span> <span class="ow">in</span> <span class="n">instance</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">followers</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">reader</span> <span class="ow">in</span> <span class="n">instance</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">subscribers</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
         <span class="k">if</span> <span class="n">reader</span><span class="o">.</span><span class="n">email</span><span class="p">:</span>
             <span class="n">subscriber_emails</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">reader</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>
 
@@ -117,8 +137,12 @@
         <span class="c1"># Use a set to avoid duplicate emails for users with overlapping subscriptions.</span>
         <span class="n">send_mail</span><span class="p">(</span>
             <span class="n">subject</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;New Article: </span><span class="si">{</span><span class="n">instance</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-            <span class="n">message</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;A new article has been published.</span><span class="se">\n\n</span><span class="s2">Title: </span><span class="si">{</span><span class="n">instance</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="se">\n\n</span><span class="si">{</span><span class="n">instance</span><span class="o">.</span><span class="n">content</span><span class="p">[:</span><span class="mi">200</span><span class="p">]</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">,</span>
-            <span class="n">from_email</span><span class="o">=</span><span class="s1">&#39;noreply@newsapp.com&#39;</span><span class="p">,</span>
+            <span class="n">message</span><span class="o">=</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;A new article has been published.</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Title: </span><span class="si">{</span><span class="n">instance</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">instance</span><span class="o">.</span><span class="n">content</span><span class="p">[:</span><span class="mi">200</span><span class="p">]</span><span class="si">}</span><span class="s2">...&quot;</span>
+            <span class="p">),</span>
+            <span class="n">from_email</span><span class="o">=</span><span class="s2">&quot;noreply@newsapp.com&quot;</span><span class="p">,</span>
             <span class="n">recipient_list</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">subscriber_emails</span><span class="p">),</span>
             <span class="n">fail_silently</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="p">)</span></div>

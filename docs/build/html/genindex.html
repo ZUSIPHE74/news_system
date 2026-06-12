@@ -35,6 +35,7 @@
 
 <div class="genindex-jumpbox">
  <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
  | <a href="#C"><strong>C</strong></a>
  | <a href="#D"><strong>D</strong></a>
  | <a href="#E"><strong>E</strong></a>
@@ -48,6 +49,7 @@
  | <a href="#N"><strong>N</strong></a>
  | <a href="#O"><strong>O</strong></a>
  | <a href="#P"><strong>P</strong></a>
+ | <a href="#Q"><strong>Q</strong></a>
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
@@ -62,11 +64,15 @@
 </li>
       <li><a href="news_app.html#news_app.models.Article.APPROVED">APPROVED (news_app.models.Article attribute)</a>
 </li>
+      <li><a href="news_app.html#news_app.models.Article.approved">approved (news_app.models.Article attribute)</a>
+</li>
       <li><a href="news_app.html#news_app.models.User.approved_articles">approved_articles (news_app.models.User attribute)</a>
 </li>
       <li><a href="news_app.html#news_app.models.Article.approved_by">approved_by (news_app.models.Article attribute)</a>
 </li>
       <li><a href="news_app.html#news_app.models.Article.approved_by_id">approved_by_id (news_app.models.Article attribute)</a>
+</li>
+      <li><a href="news_app.html#news_app.api_views.ApprovedArticleLogView">ApprovedArticleLogView (class in news_app.api_views)</a>
 </li>
       <li><a href="news_app.html#news_app.models.Article">Article (class in news_app.models)</a>
 </li>
@@ -80,15 +86,25 @@
 </li>
       <li><a href="news_app.html#news_app.tests.ArticleApprovalWorkflowTest">ArticleApprovalWorkflowTest (class in news_app.tests)</a>
 </li>
+      <li><a href="news_app.html#news_app.api_views.ArticleDetailAPIView">ArticleDetailAPIView (class in news_app.api_views)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="news_app.html#news_app.models.Publisher.articles">articles (news_app.models.Publisher attribute)</a>
+      <li><a href="news_app.html#news_app.api_views.ArticleListCreateAPIView">ArticleListCreateAPIView (class in news_app.api_views)</a>
 </li>
+      <li><a href="news_app.html#news_app.models.Newsletter.articles">articles (news_app.models.Newsletter attribute)</a>
+
+      <ul>
+        <li><a href="news_app.html#news_app.models.Publisher.articles">(news_app.models.Publisher attribute)</a>
+</li>
+      </ul></li>
       <li><a href="news_app.html#news_app.serializers.ArticleSerializer">ArticleSerializer (class in news_app.serializers)</a>
 </li>
       <li><a href="news_app.html#news_app.serializers.ArticleSerializer.Meta">ArticleSerializer.Meta (class in news_app.serializers)</a>
 </li>
       <li><a href="news_app.html#news_app.signals.assign_user_to_group">assign_user_to_group() (in module news_app.signals)</a>
+</li>
+      <li><a href="news_app.html#news_app.models.User.auth_token">auth_token (news_app.models.User attribute)</a>
 </li>
       <li><a href="news_app.html#news_app.models.Article.author">author (news_app.models.Article attribute)</a>
 
@@ -113,9 +129,19 @@
   </ul></td>
 </tr></table>
 
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="news_app.html#news_app.models.User.bio">bio (news_app.models.User attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="news_app.html#news_app.views.change_status">change_status() (in module news_app.views)</a>
+</li>
       <li><a href="news_app.html#news_app.models.Article.content">content (news_app.models.Article attribute)</a>
 
       <ul>
@@ -124,14 +150,24 @@
       </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="news_app.html#news_app.api_views.ApprovedArticleLogView.create">create() (news_app.api_views.ApprovedArticleLogView method)</a>
+</li>
       <li><a href="news_app.html#news_app.signals.create_groups_and_permissions">create_groups_and_permissions() (in module news_app.signals)</a>
 </li>
+      <li><a href="news_app.html#news_app.models.Article.created_at">created_at (news_app.models.Article attribute)</a>
+
+      <ul>
+        <li><a href="news_app.html#news_app.models.Newsletter.created_at">(news_app.models.Newsletter attribute)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
 <h2 id="D">D</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="news_app.html#news_app.models.Publisher.date_created">date_created (news_app.models.Publisher attribute)</a>
+</li>
       <li><a href="news_app.html#news_app.models.User.date_joined">date_joined (news_app.models.User attribute)</a>
 </li>
       <li><a href="news_app.html#news_app.models.Article.date_posted">date_posted (news_app.models.Article attribute)</a>
@@ -144,8 +180,14 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="news_app.html#news_app.apps.NewsAppConfig.default_auto_field">default_auto_field (news_app.apps.NewsAppConfig attribute)</a>
 </li>
-      <li><a href="news_app.html#news_app.models.Publisher.description">description (news_app.models.Publisher attribute)</a>
+      <li><a href="news_app.html#news_app.views.delete_article">delete_article() (in module news_app.views)</a>
 </li>
+      <li><a href="news_app.html#news_app.models.Newsletter.description">description (news_app.models.Newsletter attribute)</a>
+
+      <ul>
+        <li><a href="news_app.html#news_app.models.Publisher.description">(news_app.models.Publisher attribute)</a>
+</li>
+      </ul></li>
       <li><a href="news_app.html#news_app.models.Article.DRAFT">DRAFT (news_app.models.Article attribute)</a>
 </li>
   </ul></td>
@@ -154,12 +196,16 @@
 <h2 id="E">E</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="news_app.html#news_app.views.edit_profile">edit_profile() (in module news_app.views)</a>
+</li>
       <li><a href="news_app.html#news_app.models.User.EDITOR">EDITOR (news_app.models.User attribute)</a>
 </li>
       <li><a href="news_app.html#news_app.views.editor_dashboard">editor_dashboard() (in module news_app.views)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="news_app.html#news_app.models.Publisher.editors">editors (news_app.models.Publisher property)</a>
+</li>
       <li><a href="news_app.html#news_app.models.User.email">email (news_app.models.User attribute)</a>
 </li>
       <li><a href="news_app.html#news_app.views.ensure_demo_accounts">ensure_demo_accounts() (in module news_app.views)</a>
@@ -177,7 +223,11 @@
       <ul>
         <li><a href="news_app.html#news_app.serializers.AuthorSerializer.Meta.fields">(news_app.serializers.AuthorSerializer.Meta attribute)</a>
 </li>
+        <li><a href="news_app.html#news_app.serializers.NewsletterSerializer.Meta.fields">(news_app.serializers.NewsletterSerializer.Meta attribute)</a>
+</li>
         <li><a href="news_app.html#news_app.serializers.PublisherSerializer.Meta.fields">(news_app.serializers.PublisherSerializer.Meta attribute)</a>
+</li>
+        <li><a href="news_app.html#news_app.serializers.UserSerializer.Meta.fields">(news_app.serializers.UserSerializer.Meta attribute)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -186,14 +236,16 @@
 </li>
       <li><a href="news_app.html#news_app.models.User.first_name">first_name (news_app.models.User attribute)</a>
 </li>
-      <li><a href="news_app.html#news_app.models.User.followers">followers (news_app.models.User attribute)</a>
-</li>
   </ul></td>
 </tr></table>
 
 <h2 id="G">G</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="news_app.html#news_app.models.Newsletter.get_next_by_created_at">get_next_by_created_at() (news_app.models.Newsletter method)</a>
+</li>
+      <li><a href="news_app.html#news_app.models.Publisher.get_next_by_date_created">get_next_by_date_created() (news_app.models.Publisher method)</a>
+</li>
       <li><a href="news_app.html#news_app.models.User.get_next_by_date_joined">get_next_by_date_joined() (news_app.models.User method)</a>
 </li>
       <li><a href="news_app.html#news_app.models.Article.get_next_by_date_posted">get_next_by_date_posted() (news_app.models.Article method)</a>
@@ -202,6 +254,20 @@
         <li><a href="news_app.html#news_app.models.Newsletter.get_next_by_date_posted">(news_app.models.Newsletter method)</a>
 </li>
       </ul></li>
+      <li><a href="news_app.html#news_app.api_views.ArticleDetailAPIView.get_permissions">get_permissions() (news_app.api_views.ArticleDetailAPIView method)</a>
+
+      <ul>
+        <li><a href="news_app.html#news_app.api_views.ArticleListCreateAPIView.get_permissions">(news_app.api_views.ArticleListCreateAPIView method)</a>
+</li>
+      </ul></li>
+      <li><a href="news_app.html#news_app.models.Article.get_poster_type_display">get_poster_type_display() (news_app.models.Article method)</a>
+</li>
+      <li><a href="news_app.html#news_app.models.Newsletter.get_previous_by_created_at">get_previous_by_created_at() (news_app.models.Newsletter method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="news_app.html#news_app.models.Publisher.get_previous_by_date_created">get_previous_by_date_created() (news_app.models.Publisher method)</a>
+</li>
       <li><a href="news_app.html#news_app.models.User.get_previous_by_date_joined">get_previous_by_date_joined() (news_app.models.User method)</a>
 </li>
       <li><a href="news_app.html#news_app.models.Article.get_previous_by_date_posted">get_previous_by_date_posted() (news_app.models.Article method)</a>
@@ -210,10 +276,12 @@
         <li><a href="news_app.html#news_app.models.Newsletter.get_previous_by_date_posted">(news_app.models.Newsletter method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="news_app.html#news_app.api_views.SubscribedArticlesAPIView.get_queryset">get_queryset() (news_app.api_views.SubscribedArticlesAPIView method)</a>
+      <li><a href="news_app.html#news_app.api_views.ArticleListCreateAPIView.get_queryset">get_queryset() (news_app.api_views.ArticleListCreateAPIView method)</a>
+
+      <ul>
+        <li><a href="news_app.html#news_app.api_views.SubscribedArticlesAPIView.get_queryset">(news_app.api_views.SubscribedArticlesAPIView method)</a>
 </li>
+      </ul></li>
       <li><a href="news_app.html#news_app.models.User.get_role_display">get_role_display() (news_app.models.User method)</a>
 </li>
       <li><a href="news_app.html#news_app.models.Article.get_status_display">get_status_display() (news_app.models.Article method)</a>
@@ -226,6 +294,12 @@
 <h2 id="H">H</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="news_app.html#news_app.api_views.IsEditorOrAuthor.has_object_permission">has_object_permission() (news_app.api_views.IsEditorOrAuthor method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="news_app.html#news_app.api_views.IsJournalist.has_permission">has_permission() (news_app.api_views.IsJournalist method)</a>
+</li>
       <li><a href="news_app.html#news_app.views.home">home() (in module news_app.views)</a>
 </li>
   </ul></td>
@@ -244,13 +318,25 @@
         <li><a href="news_app.html#news_app.models.User.id">(news_app.models.User attribute)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="news_app.html#news_app.models.Article.image">image (news_app.models.Article attribute)</a>
+</li>
       <li><a href="news_app.html#news_app.models.User.is_active">is_active (news_app.models.User attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="news_app.html#news_app.models.User.is_staff">is_staff (news_app.models.User attribute)</a>
 </li>
       <li><a href="news_app.html#news_app.models.User.is_superuser">is_superuser (news_app.models.User attribute)</a>
+</li>
+      <li><a href="news_app.html#news_app.models.Publisher.is_verified">is_verified (news_app.models.Publisher attribute)</a>
+
+      <ul>
+        <li><a href="news_app.html#news_app.models.User.is_verified">(news_app.models.User attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="news_app.html#news_app.api_views.IsEditorOrAuthor">IsEditorOrAuthor (class in news_app.api_views)</a>
+</li>
+      <li><a href="news_app.html#news_app.api_views.IsJournalist">IsJournalist (class in news_app.api_views)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -260,9 +346,15 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="news_app.html#news_app.models.User.JOURNALIST">JOURNALIST (news_app.models.User attribute)</a>
 </li>
+      <li><a href="news_app.html#news_app.views.journalist_dashboard">journalist_dashboard() (in module news_app.views)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="news_app.html#news_app.views.journalist_dashboard">journalist_dashboard() (in module news_app.views)</a>
+      <li><a href="news_app.html#news_app.views.journalist_profile">journalist_profile() (in module news_app.views)</a>
+</li>
+      <li><a href="news_app.html#news_app.tests.JournalistAndEditorCRUDActionsTest">JournalistAndEditorCRUDActionsTest (class in news_app.tests)</a>
+</li>
+      <li><a href="news_app.html#news_app.models.Publisher.journalists">journalists (news_app.models.Publisher property)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -304,7 +396,11 @@
       <ul>
         <li><a href="news_app.html#news_app.serializers.AuthorSerializer.Meta.model">(news_app.serializers.AuthorSerializer.Meta attribute)</a>
 </li>
+        <li><a href="news_app.html#news_app.serializers.NewsletterSerializer.Meta.model">(news_app.serializers.NewsletterSerializer.Meta attribute)</a>
+</li>
         <li><a href="news_app.html#news_app.serializers.PublisherSerializer.Meta.model">(news_app.serializers.PublisherSerializer.Meta attribute)</a>
+</li>
+        <li><a href="news_app.html#news_app.serializers.UserSerializer.Meta.model">(news_app.serializers.UserSerializer.Meta attribute)</a>
 </li>
       </ul></li>
       <li>
@@ -421,8 +517,6 @@
         <li><a href="news_app.html#module-news_app.urls">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     news_app.views
 
@@ -437,6 +531,8 @@
         <li><a href="news_project.html#module-news_project">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     news_project.asgi
 
@@ -475,7 +571,25 @@
 </li>
       <li><a href="news_app.html#news_app.models.Newsletter.NotUpdated">Newsletter.NotUpdated</a>
 </li>
-      <li><a href="news_app.html#news_app.models.Publisher.newsletters">newsletters (news_app.models.Publisher attribute)</a>
+      <li><a href="news_app.html#news_app.views.newsletter_create">newsletter_create() (in module news_app.views)</a>
+</li>
+      <li><a href="news_app.html#news_app.views.newsletter_delete">newsletter_delete() (in module news_app.views)</a>
+</li>
+      <li><a href="news_app.html#news_app.views.newsletter_detail">newsletter_detail() (in module news_app.views)</a>
+</li>
+      <li><a href="news_app.html#news_app.views.newsletter_list">newsletter_list() (in module news_app.views)</a>
+</li>
+      <li><a href="news_app.html#news_app.views.newsletter_update">newsletter_update() (in module news_app.views)</a>
+</li>
+      <li><a href="news_app.html#news_app.models.Article.newsletters">newsletters (news_app.models.Article attribute)</a>
+
+      <ul>
+        <li><a href="news_app.html#news_app.models.Publisher.newsletters">(news_app.models.Publisher attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="news_app.html#news_app.serializers.NewsletterSerializer">NewsletterSerializer (class in news_app.serializers)</a>
+</li>
+      <li><a href="news_app.html#news_app.serializers.NewsletterSerializer.Meta">NewsletterSerializer.Meta (class in news_app.serializers)</a>
 </li>
       <li><a href="news_app.html#news_app.signals.notify_subscribers_on_approval">notify_subscribers_on_approval() (in module news_app.signals)</a>
 </li>
@@ -503,10 +617,34 @@
 </li>
       <li><a href="news_app.html#news_app.models.Article.PENDING">PENDING (news_app.models.Article attribute)</a>
 </li>
-      <li><a href="news_app.html#news_app.api_views.SubscribedArticlesAPIView.permission_classes">permission_classes (news_app.api_views.SubscribedArticlesAPIView attribute)</a>
+      <li><a href="news_app.html#news_app.api_views.ArticleListCreateAPIView.perform_create">perform_create() (news_app.api_views.ArticleListCreateAPIView method)</a>
+</li>
+      <li><a href="news_app.html#news_app.api_views.ArticleDetailAPIView.perform_update">perform_update() (news_app.api_views.ArticleDetailAPIView method)</a>
+</li>
+      <li><a href="news_app.html#news_app.api_views.ApprovedArticleLogView.permission_classes">permission_classes (news_app.api_views.ApprovedArticleLogView attribute)</a>
+
+      <ul>
+        <li><a href="news_app.html#news_app.api_views.ArticleDetailAPIView.permission_classes">(news_app.api_views.ArticleDetailAPIView attribute)</a>
+</li>
+        <li><a href="news_app.html#news_app.api_views.ArticleListCreateAPIView.permission_classes">(news_app.api_views.ArticleListCreateAPIView attribute)</a>
+</li>
+        <li><a href="news_app.html#news_app.api_views.SubscribedArticlesAPIView.permission_classes">(news_app.api_views.SubscribedArticlesAPIView attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="news_app.html#news_app.models.Article.POSTER_CHOICES">POSTER_CHOICES (news_app.models.Article attribute)</a>
+</li>
+      <li><a href="news_app.html#news_app.models.Article.POSTER_JOURNALIST">POSTER_JOURNALIST (news_app.models.Article attribute)</a>
+</li>
+      <li><a href="news_app.html#news_app.models.Article.POSTER_PUBLISHER">POSTER_PUBLISHER (news_app.models.Article attribute)</a>
+</li>
+      <li><a href="news_app.html#news_app.models.Article.poster_type">poster_type (news_app.models.Article attribute)</a>
+</li>
+      <li><a href="news_app.html#news_app.models.User.profile_picture">profile_picture (news_app.models.User attribute)</a>
 </li>
       <li><a href="news_app.html#news_app.models.Publisher">Publisher (class in news_app.models)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="news_app.html#news_app.models.Article.publisher">publisher (news_app.models.Article attribute)</a>
 
       <ul>
@@ -515,13 +653,15 @@
         <li><a href="news_app.html#news_app.models.User.publisher">(news_app.models.User attribute)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="news_app.html#news_app.models.Publisher.DoesNotExist">Publisher.DoesNotExist</a>
 </li>
       <li><a href="news_app.html#news_app.models.Publisher.MultipleObjectsReturned">Publisher.MultipleObjectsReturned</a>
 </li>
       <li><a href="news_app.html#news_app.models.Publisher.NotUpdated">Publisher.NotUpdated</a>
+</li>
+      <li><a href="news_app.html#news_app.views.publisher_create">publisher_create() (in module news_app.views)</a>
+</li>
+      <li><a href="news_app.html#news_app.views.publisher_edit">publisher_edit() (in module news_app.views)</a>
 </li>
       <li><a href="news_app.html#news_app.models.Article.publisher_id">publisher_id (news_app.models.Article attribute)</a>
 
@@ -531,9 +671,21 @@
         <li><a href="news_app.html#news_app.models.User.publisher_id">(news_app.models.User attribute)</a>
 </li>
       </ul></li>
+      <li><a href="news_app.html#news_app.views.publisher_list">publisher_list() (in module news_app.views)</a>
+</li>
+      <li><a href="news_app.html#news_app.views.publisher_profile">publisher_profile() (in module news_app.views)</a>
+</li>
       <li><a href="news_app.html#news_app.serializers.PublisherSerializer">PublisherSerializer (class in news_app.serializers)</a>
 </li>
       <li><a href="news_app.html#news_app.serializers.PublisherSerializer.Meta">PublisherSerializer.Meta (class in news_app.serializers)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Q">Q</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="news_app.html#news_app.api_views.ArticleDetailAPIView.queryset">queryset (news_app.api_views.ArticleDetailAPIView attribute)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -547,9 +699,11 @@
 </li>
       <li><a href="news_app.html#news_app.apps.NewsAppConfig.ready">ready() (news_app.apps.NewsAppConfig method)</a>
 </li>
+      <li><a href="news_app.html#news_app.models.Article.REJECTED">REJECTED (news_app.models.Article attribute)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="news_app.html#news_app.models.Article.REJECTED">REJECTED (news_app.models.Article attribute)</a>
+      <li><a href="news_app.html#news_app.tests.RESTAPIComprehensiveTest">RESTAPIComprehensiveTest (class in news_app.tests)</a>
 </li>
       <li><a href="news_app.html#news_app.models.User.role">role (news_app.models.User attribute)</a>
 </li>
@@ -563,8 +717,14 @@
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="news_app.html#news_app.models.User.save">save() (news_app.models.User method)</a>
+      <li><a href="news_app.html#news_app.models.Article.save">save() (news_app.models.Article method)</a>
+
+      <ul>
+        <li><a href="news_app.html#news_app.models.Newsletter.save">(news_app.models.Newsletter method)</a>
 </li>
+        <li><a href="news_app.html#news_app.models.User.save">(news_app.models.User method)</a>
+</li>
+      </ul></li>
       <li>
     seed_se_articles
 
@@ -572,11 +732,23 @@
         <li><a href="seed_se_articles.html#module-seed_se_articles">module</a>
 </li>
       </ul></li>
-      <li><a href="news_app.html#news_app.api_views.SubscribedArticlesAPIView.serializer_class">serializer_class (news_app.api_views.SubscribedArticlesAPIView attribute)</a>
+      <li><a href="news_app.html#news_app.api_views.ApprovedArticleLogView.serializer_class">serializer_class (news_app.api_views.ApprovedArticleLogView attribute)</a>
+
+      <ul>
+        <li><a href="news_app.html#news_app.api_views.ArticleDetailAPIView.serializer_class">(news_app.api_views.ArticleDetailAPIView attribute)</a>
 </li>
+        <li><a href="news_app.html#news_app.api_views.ArticleListCreateAPIView.serializer_class">(news_app.api_views.ArticleListCreateAPIView attribute)</a>
+</li>
+        <li><a href="news_app.html#news_app.api_views.SubscribedArticlesAPIView.serializer_class">(news_app.api_views.SubscribedArticlesAPIView attribute)</a>
+</li>
+      </ul></li>
       <li><a href="news_app.html#news_app.tests.ArticleApprovalWorkflowTest.setUp">setUp() (news_app.tests.ArticleApprovalWorkflowTest method)</a>
 
       <ul>
+        <li><a href="news_app.html#news_app.tests.JournalistAndEditorCRUDActionsTest.setUp">(news_app.tests.JournalistAndEditorCRUDActionsTest method)</a>
+</li>
+        <li><a href="news_app.html#news_app.tests.RESTAPIComprehensiveTest.setUp">(news_app.tests.RESTAPIComprehensiveTest method)</a>
+</li>
         <li><a href="news_app.html#news_app.tests.RoleLoginRedirectTest.setUp">(news_app.tests.RoleLoginRedirectTest method)</a>
 </li>
         <li><a href="news_app.html#news_app.tests.SubscribedArticlesAPITest.setUp">(news_app.tests.SubscribedArticlesAPITest method)</a>
@@ -584,12 +756,12 @@
         <li><a href="news_app.html#news_app.tests.UserGroupAssignmentTest.setUp">(news_app.tests.UserGroupAssignmentTest method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="news_app.html#news_app.admin.setup_groups">setup_groups() (in module news_app.admin)</a>
 </li>
       <li><a href="news_app.html#news_app.views.setup_permissions_view">setup_permissions_view() (in module news_app.views)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="news_app.html#news_app.views.signup_view">signup_view() (in module news_app.views)</a>
 </li>
       <li><a href="news_app.html#news_app.tests.SignupViewTest">SignupViewTest (class in news_app.tests)</a>
@@ -602,6 +774,10 @@
 </li>
       <li><a href="news_app.html#news_app.views.submit_article">submit_article() (in module news_app.views)</a>
 </li>
+      <li><a href="news_app.html#news_app.views.subscribe_to_journalist">subscribe_to_journalist() (in module news_app.views)</a>
+</li>
+      <li><a href="news_app.html#news_app.views.subscribe_to_publisher">subscribe_to_publisher() (in module news_app.views)</a>
+</li>
       <li><a href="news_app.html#news_app.models.User.subscribed_journalists">subscribed_journalists (news_app.models.User attribute)</a>
 </li>
       <li><a href="news_app.html#news_app.models.User.subscribed_publishers">subscribed_publishers (news_app.models.User attribute)</a>
@@ -611,7 +787,11 @@
       <li><a href="news_app.html#news_app.api_views.SubscribedArticlesAPIView">SubscribedArticlesAPIView (class in news_app.api_views)</a>
 </li>
       <li><a href="news_app.html#news_app.models.Publisher.subscribers">subscribers (news_app.models.Publisher attribute)</a>
+
+      <ul>
+        <li><a href="news_app.html#news_app.models.User.subscribers">(news_app.models.User attribute)</a>
 </li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -624,15 +804,45 @@
 </li>
       <li><a href="news_app.html#news_app.tests.ArticleApprovalWorkflowTest.test_editor_can_approve_article">test_editor_can_approve_article() (news_app.tests.ArticleApprovalWorkflowTest method)</a>
 </li>
+      <li><a href="news_app.html#news_app.tests.JournalistAndEditorCRUDActionsTest.test_editor_can_create_newsletter">test_editor_can_create_newsletter() (news_app.tests.JournalistAndEditorCRUDActionsTest method)</a>
+</li>
+      <li><a href="news_app.html#news_app.tests.RESTAPIComprehensiveTest.test_editor_can_delete_article_via_api">test_editor_can_delete_article_via_api() (news_app.tests.RESTAPIComprehensiveTest method)</a>
+</li>
+      <li><a href="news_app.html#news_app.tests.JournalistAndEditorCRUDActionsTest.test_editor_can_update_newsletter_same_publisher">test_editor_can_update_newsletter_same_publisher() (news_app.tests.JournalistAndEditorCRUDActionsTest method)</a>
+</li>
+      <li><a href="news_app.html#news_app.tests.JournalistAndEditorCRUDActionsTest.test_editor_cannot_update_newsletter_different_publisher">test_editor_cannot_update_newsletter_different_publisher() (news_app.tests.JournalistAndEditorCRUDActionsTest method)</a>
+</li>
       <li><a href="news_app.html#news_app.tests.RoleLoginRedirectTest.test_editor_redirected_to_editor_dashboard">test_editor_redirected_to_editor_dashboard() (news_app.tests.RoleLoginRedirectTest method)</a>
 </li>
+      <li><a href="news_app.html#news_app.tests.RESTAPIComprehensiveTest.test_global_approved_articles_list">test_global_approved_articles_list() (news_app.tests.RESTAPIComprehensiveTest method)</a>
+</li>
       <li><a href="news_app.html#news_app.tests.UserGroupAssignmentTest.test_journalist_assigned_to_journalist_group">test_journalist_assigned_to_journalist_group() (news_app.tests.UserGroupAssignmentTest method)</a>
+</li>
+      <li><a href="news_app.html#news_app.tests.RESTAPIComprehensiveTest.test_journalist_can_create_article_via_api">test_journalist_can_create_article_via_api() (news_app.tests.RESTAPIComprehensiveTest method)</a>
+</li>
+      <li><a href="news_app.html#news_app.tests.JournalistAndEditorCRUDActionsTest.test_journalist_can_delete_own_article">test_journalist_can_delete_own_article() (news_app.tests.JournalistAndEditorCRUDActionsTest method)</a>
+</li>
+      <li><a href="news_app.html#news_app.tests.JournalistAndEditorCRUDActionsTest.test_journalist_can_update_own_article">test_journalist_can_update_own_article() (news_app.tests.JournalistAndEditorCRUDActionsTest method)</a>
+</li>
+      <li><a href="news_app.html#news_app.tests.JournalistAndEditorCRUDActionsTest.test_journalist_can_update_own_newsletter">test_journalist_can_update_own_newsletter() (news_app.tests.JournalistAndEditorCRUDActionsTest method)</a>
+</li>
+      <li><a href="news_app.html#news_app.tests.JournalistAndEditorCRUDActionsTest.test_journalist_cannot_delete_other_article">test_journalist_cannot_delete_other_article() (news_app.tests.JournalistAndEditorCRUDActionsTest method)</a>
+</li>
+      <li><a href="news_app.html#news_app.tests.JournalistAndEditorCRUDActionsTest.test_journalist_cannot_update_other_article">test_journalist_cannot_update_other_article() (news_app.tests.JournalistAndEditorCRUDActionsTest method)</a>
+</li>
+      <li><a href="news_app.html#news_app.tests.JournalistAndEditorCRUDActionsTest.test_journalist_cannot_update_other_newsletter">test_journalist_cannot_update_other_newsletter() (news_app.tests.JournalistAndEditorCRUDActionsTest method)</a>
 </li>
       <li><a href="news_app.html#news_app.tests.RoleLoginRedirectTest.test_journalist_redirected_to_journalist_dashboard">test_journalist_redirected_to_journalist_dashboard() (news_app.tests.RoleLoginRedirectTest method)</a>
 </li>
       <li><a href="news_app.html#news_app.tests.ArticleApprovalWorkflowTest.test_non_editor_cannot_approve_article">test_non_editor_cannot_approve_article() (news_app.tests.ArticleApprovalWorkflowTest method)</a>
 </li>
+      <li><a href="news_app.html#news_app.tests.RESTAPIComprehensiveTest.test_post_approval_subscriber_email_trigger">test_post_approval_subscriber_email_trigger() (news_app.tests.RESTAPIComprehensiveTest method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="news_app.html#news_app.tests.UserGroupAssignmentTest.test_reader_assigned_to_reader_group">test_reader_assigned_to_reader_group() (news_app.tests.UserGroupAssignmentTest method)</a>
+</li>
+      <li><a href="news_app.html#news_app.tests.RESTAPIComprehensiveTest.test_reader_cannot_create_article_via_api">test_reader_cannot_create_article_via_api() (news_app.tests.RESTAPIComprehensiveTest method)</a>
 </li>
       <li><a href="news_app.html#news_app.tests.RoleLoginRedirectTest.test_reader_redirected_to_reader_dashboard">test_reader_redirected_to_reader_dashboard() (news_app.tests.RoleLoginRedirectTest method)</a>
 </li>
@@ -640,8 +850,6 @@
 </li>
       <li><a href="news_app.html#news_app.tests.SubscribedArticlesAPITest.test_reader_subscribed_to_publisher_sees_publisher_article">test_reader_subscribed_to_publisher_sees_publisher_article() (news_app.tests.SubscribedArticlesAPITest method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="news_app.html#news_app.tests.SignupViewTest.test_signup_creates_editor_when_role_selected">test_signup_creates_editor_when_role_selected() (news_app.tests.SignupViewTest method)</a>
 </li>
       <li><a href="news_app.html#news_app.tests.SignupViewTest.test_signup_creates_journalist_when_role_selected">test_signup_creates_journalist_when_role_selected() (news_app.tests.SignupViewTest method)</a>
@@ -658,6 +866,10 @@
 </li>
       <li><a href="news_app.html#news_app.tests.SignupViewTest.test_signup_with_invalid_role_falls_back_to_reader">test_signup_with_invalid_role_falls_back_to_reader() (news_app.tests.SignupViewTest method)</a>
 </li>
+      <li><a href="news_app.html#news_app.tests.RESTAPIComprehensiveTest.test_subscribed_articles_feed">test_subscribed_articles_feed() (news_app.tests.RESTAPIComprehensiveTest method)</a>
+</li>
+      <li><a href="news_app.html#news_app.tests.RESTAPIComprehensiveTest.test_token_retrieval_endpoint">test_token_retrieval_endpoint() (news_app.tests.RESTAPIComprehensiveTest method)</a>
+</li>
       <li><a href="news_app.html#news_app.tests.SubscribedArticlesAPITest.test_unauthenticated_user_denied">test_unauthenticated_user_denied() (news_app.tests.SubscribedArticlesAPITest method)</a>
 </li>
       <li><a href="news_app.html#news_app.tests.SubscribedArticlesAPITest.test_unsubscribed_reader_sees_no_articles">test_unsubscribed_reader_sees_no_articles() (news_app.tests.SubscribedArticlesAPITest method)</a>
@@ -668,22 +880,30 @@
         <li><a href="news_app.html#news_app.models.Newsletter.title">(news_app.models.Newsletter attribute)</a>
 </li>
       </ul></li>
+      <li><a href="news_app.html#news_app.serializers.UserSerializer.to_representation">to_representation() (news_app.serializers.UserSerializer method)</a>
+</li>
   </ul></td>
 </tr></table>
 
 <h2 id="U">U</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="news_app.html#news_app.views.unsubscribe_from_journalist">unsubscribe_from_journalist() (in module news_app.views)</a>
+</li>
+      <li><a href="news_app.html#news_app.views.unsubscribe_from_publisher">unsubscribe_from_publisher() (in module news_app.views)</a>
+</li>
+      <li><a href="news_app.html#news_app.views.update_article">update_article() (in module news_app.views)</a>
+</li>
       <li><a href="news_app.html#news_app.models.User">User (class in news_app.models)</a>
 </li>
       <li><a href="news_app.html#news_app.models.User.DoesNotExist">User.DoesNotExist</a>
 </li>
       <li><a href="news_app.html#news_app.models.User.MultipleObjectsReturned">User.MultipleObjectsReturned</a>
 </li>
-      <li><a href="news_app.html#news_app.models.User.NotUpdated">User.NotUpdated</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="news_app.html#news_app.models.User.NotUpdated">User.NotUpdated</a>
+</li>
       <li><a href="news_app.html#news_app.models.User.user_permissions">user_permissions (news_app.models.User attribute)</a>
 </li>
       <li><a href="news_app.html#news_app.admin.UserAdmin">UserAdmin (class in news_app.admin)</a>
@@ -691,6 +911,10 @@
       <li><a href="news_app.html#news_app.tests.UserGroupAssignmentTest">UserGroupAssignmentTest (class in news_app.tests)</a>
 </li>
       <li><a href="news_app.html#news_app.models.User.username">username (news_app.models.User attribute)</a>
+</li>
+      <li><a href="news_app.html#news_app.serializers.UserSerializer">UserSerializer (class in news_app.serializers)</a>
+</li>
+      <li><a href="news_app.html#news_app.serializers.UserSerializer.Meta">UserSerializer.Meta (class in news_app.serializers)</a>
 </li>
   </ul></td>
 </tr></table>
