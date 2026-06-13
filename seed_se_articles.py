@@ -2,7 +2,7 @@ import os
 import django
 
 # Set up Django environment before importing models
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "news_project.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "news_system.settings")
 django.setup()
 
 # noqa: E402

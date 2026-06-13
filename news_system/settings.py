@@ -49,7 +49,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "news_project.urls"
+ROOT_URLCONF = "news_system.urls"
 
 TEMPLATES = [
     {
@@ -67,7 +67,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "news_project.wsgi.application"
+WSGI_APPLICATION = "news_system.wsgi.application"
 
 # MariaDB is the default database for this project.
 # DATABASES = {

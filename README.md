@@ -56,7 +56,7 @@ news_system/
 |   |-- templates/
 |   |   `-- news_app/   <-- Consolidated templates
 |   |-- ...
-`-- news_project/
+`-- news_system/
     |-- settings.py
     `-- ...
 ```

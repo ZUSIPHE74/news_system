@@ -6,5 +6,5 @@ news_system
 
    manage
    news_app
-   news_project
+   news_system
    seed_se_articles

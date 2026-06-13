@@ -11,7 +11,7 @@ import django
 sys.path.insert(0, os.path.abspath("../.."))
 
 # Configure Django settings before importing any Django modules.
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "news_project.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "news_system.settings")
 django.setup()
 
 # -- Project information -----------------------------------------------------
