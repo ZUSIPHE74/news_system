@@ -1,3 +1,9 @@
+"""
+URL routing configuration for the news_app application.
+Maps views to endpoints for Reader, Editor, and Journalist actions,
+as well as subscription operations and REST API endpoints.
+"""
+
 from django.urls import path
 from . import views
 from rest_framework.authtoken.views import obtain_auth_token

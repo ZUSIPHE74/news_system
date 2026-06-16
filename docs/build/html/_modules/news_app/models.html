@@ -37,7 +37,7 @@
 
 
 <div class="viewcode-block" id="Publisher">
-<a class="viewcode-back" href="../../news_app.html#news_app.models.Publisher">[docs]</a>
+<a class="viewcode-back" href="../../news_app.html#news_app.forms.Publisher">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Publisher</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represents a news publishing organization.</span>
@@ -66,7 +66,7 @@
 
 
 <div class="viewcode-block" id="User">
-<a class="viewcode-back" href="../../news_app.html#news_app.models.User">[docs]</a>
+<a class="viewcode-back" href="../../news_app.html#news_app.forms.User">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">User</span><span class="p">(</span><span class="n">AbstractUser</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Custom user model supporting roles: Reader, Editor, and Journalist.</span>
@@ -108,7 +108,7 @@
     <span class="p">)</span>
 
 <div class="viewcode-block" id="User.save">
-<a class="viewcode-back" href="../../news_app.html#news_app.models.User.save">[docs]</a>
+<a class="viewcode-back" href="../../news_app.html#news_app.forms.User.save">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Custom save logic to enforce mutual exclusivity of role-based fields.</span>
@@ -130,7 +130,7 @@
 
 
 <div class="viewcode-block" id="Article">
-<a class="viewcode-back" href="../../news_app.html#news_app.models.Article">[docs]</a>
+<a class="viewcode-back" href="../../news_app.html#news_app.forms.Article">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Article</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represents a news article with a workflow: Draft -&gt; Pending -&gt; Approved/Rejected.</span>
@@ -188,7 +188,7 @@
     <span class="p">)</span>
 
 <div class="viewcode-block" id="Article.save">
-<a class="viewcode-back" href="../../news_app.html#news_app.models.Article.save">[docs]</a>
+<a class="viewcode-back" href="../../news_app.html#news_app.forms.Article.save">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Auto-synchronize approved Boolean with Article status choices.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">approved</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">APPROVED</span>
@@ -207,7 +207,7 @@
 
 
 <div class="viewcode-block" id="Newsletter">
-<a class="viewcode-back" href="../../news_app.html#news_app.models.Newsletter">[docs]</a>
+<a class="viewcode-back" href="../../news_app.html#news_app.forms.Newsletter">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Newsletter</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A collection of articles curated for a publisher&#39;s subscribers.</span>
@@ -234,7 +234,7 @@
     <span class="p">)</span>
 
 <div class="viewcode-block" id="Newsletter.save">
-<a class="viewcode-back" href="../../news_app.html#news_app.models.Newsletter.save">[docs]</a>
+<a class="viewcode-back" href="../../news_app.html#news_app.forms.Newsletter.save">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Ensure content and description are aligned.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">:</span>

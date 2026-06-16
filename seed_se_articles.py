@@ -1,3 +1,8 @@
+"""
+Seeding script to create mock publishers, journalists, editors, and articles
+for demonstration and testing purposes.
+"""
+
 import os
 import django
 

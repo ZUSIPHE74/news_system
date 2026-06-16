@@ -1,3 +1,8 @@
+"""
+URL configuration for the news_system project.
+Specifies root URL routing and static media endpoints.
+"""
+
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings

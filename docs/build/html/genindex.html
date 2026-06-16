@@ -88,8 +88,12 @@
 </li>
       <li><a href="news_app.html#news_app.api_views.ArticleDetailAPIView">ArticleDetailAPIView (class in news_app.api_views)</a>
 </li>
+      <li><a href="news_app.html#news_app.forms.ArticleForm">ArticleForm (class in news_app.forms)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="news_app.html#news_app.forms.ArticleForm.Meta">ArticleForm.Meta (class in news_app.forms)</a>
+</li>
       <li><a href="news_app.html#news_app.api_views.ArticleListCreateAPIView">ArticleListCreateAPIView (class in news_app.api_views)</a>
 </li>
       <li><a href="news_app.html#news_app.models.Newsletter.articles">articles (news_app.models.Newsletter attribute)</a>
@@ -131,6 +135,18 @@
 
 <h2 id="B">B</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="news_app.html#news_app.forms.ArticleForm.base_fields">base_fields (news_app.forms.ArticleForm attribute)</a>
+
+      <ul>
+        <li><a href="news_app.html#news_app.forms.JournalistArticleForm.base_fields">(news_app.forms.JournalistArticleForm attribute)</a>
+</li>
+        <li><a href="news_app.html#news_app.forms.NewsletterForm.base_fields">(news_app.forms.NewsletterForm attribute)</a>
+</li>
+        <li><a href="news_app.html#news_app.forms.PublisherForm.base_fields">(news_app.forms.PublisherForm attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="news_app.html#news_app.models.User.bio">bio (news_app.models.User attribute)</a>
 </li>
@@ -176,6 +192,16 @@
         <li><a href="news_app.html#news_app.models.Newsletter.date_posted">(news_app.models.Newsletter attribute)</a>
 </li>
       </ul></li>
+      <li><a href="news_app.html#news_app.forms.ArticleForm.declared_fields">declared_fields (news_app.forms.ArticleForm attribute)</a>
+
+      <ul>
+        <li><a href="news_app.html#news_app.forms.JournalistArticleForm.declared_fields">(news_app.forms.JournalistArticleForm attribute)</a>
+</li>
+        <li><a href="news_app.html#news_app.forms.NewsletterForm.declared_fields">(news_app.forms.NewsletterForm attribute)</a>
+</li>
+        <li><a href="news_app.html#news_app.forms.PublisherForm.declared_fields">(news_app.forms.PublisherForm attribute)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="news_app.html#news_app.apps.NewsAppConfig.default_auto_field">default_auto_field (news_app.apps.NewsAppConfig attribute)</a>
@@ -218,9 +244,17 @@
 <h2 id="F">F</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="news_app.html#news_app.serializers.ArticleSerializer.Meta.fields">fields (news_app.serializers.ArticleSerializer.Meta attribute)</a>
+      <li><a href="news_app.html#news_app.forms.ArticleForm.Meta.fields">fields (news_app.forms.ArticleForm.Meta attribute)</a>
 
       <ul>
+        <li><a href="news_app.html#news_app.forms.JournalistArticleForm.Meta.fields">(news_app.forms.JournalistArticleForm.Meta attribute)</a>
+</li>
+        <li><a href="news_app.html#news_app.forms.NewsletterForm.Meta.fields">(news_app.forms.NewsletterForm.Meta attribute)</a>
+</li>
+        <li><a href="news_app.html#news_app.forms.PublisherForm.Meta.fields">(news_app.forms.PublisherForm.Meta attribute)</a>
+</li>
+        <li><a href="news_app.html#news_app.serializers.ArticleSerializer.Meta.fields">(news_app.serializers.ArticleSerializer.Meta attribute)</a>
+</li>
         <li><a href="news_app.html#news_app.serializers.AuthorSerializer.Meta.fields">(news_app.serializers.AuthorSerializer.Meta attribute)</a>
 </li>
         <li><a href="news_app.html#news_app.serializers.NewsletterSerializer.Meta.fields">(news_app.serializers.NewsletterSerializer.Meta attribute)</a>
@@ -348,11 +382,15 @@
 </li>
       <li><a href="news_app.html#news_app.views.journalist_dashboard">journalist_dashboard() (in module news_app.views)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="news_app.html#news_app.views.journalist_profile">journalist_profile() (in module news_app.views)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="news_app.html#news_app.tests.JournalistAndEditorCRUDActionsTest">JournalistAndEditorCRUDActionsTest (class in news_app.tests)</a>
+</li>
+      <li><a href="news_app.html#news_app.forms.JournalistArticleForm">JournalistArticleForm (class in news_app.forms)</a>
+</li>
+      <li><a href="news_app.html#news_app.forms.JournalistArticleForm.Meta">JournalistArticleForm.Meta (class in news_app.forms)</a>
 </li>
       <li><a href="news_app.html#news_app.models.Publisher.journalists">journalists (news_app.models.Publisher property)</a>
 </li>
@@ -390,10 +428,28 @@
 </li>
       </ul></li>
       <li><a href="news_app.html#news_app.admin.UserAdmin.media">media (news_app.admin.UserAdmin property)</a>
-</li>
-      <li><a href="news_app.html#news_app.serializers.ArticleSerializer.Meta.model">model (news_app.serializers.ArticleSerializer.Meta attribute)</a>
 
       <ul>
+        <li><a href="news_app.html#news_app.forms.ArticleForm.media">(news_app.forms.ArticleForm property)</a>
+</li>
+        <li><a href="news_app.html#news_app.forms.JournalistArticleForm.media">(news_app.forms.JournalistArticleForm property)</a>
+</li>
+        <li><a href="news_app.html#news_app.forms.NewsletterForm.media">(news_app.forms.NewsletterForm property)</a>
+</li>
+        <li><a href="news_app.html#news_app.forms.PublisherForm.media">(news_app.forms.PublisherForm property)</a>
+</li>
+      </ul></li>
+      <li><a href="news_app.html#news_app.forms.ArticleForm.Meta.model">model (news_app.forms.ArticleForm.Meta attribute)</a>
+
+      <ul>
+        <li><a href="news_app.html#news_app.forms.JournalistArticleForm.Meta.model">(news_app.forms.JournalistArticleForm.Meta attribute)</a>
+</li>
+        <li><a href="news_app.html#news_app.forms.NewsletterForm.Meta.model">(news_app.forms.NewsletterForm.Meta attribute)</a>
+</li>
+        <li><a href="news_app.html#news_app.forms.PublisherForm.Meta.model">(news_app.forms.PublisherForm.Meta attribute)</a>
+</li>
+        <li><a href="news_app.html#news_app.serializers.ArticleSerializer.Meta.model">(news_app.serializers.ArticleSerializer.Meta attribute)</a>
+</li>
         <li><a href="news_app.html#news_app.serializers.AuthorSerializer.Meta.model">(news_app.serializers.AuthorSerializer.Meta attribute)</a>
 </li>
         <li><a href="news_app.html#news_app.serializers.NewsletterSerializer.Meta.model">(news_app.serializers.NewsletterSerializer.Meta attribute)</a>
@@ -416,6 +472,8 @@
         <li><a href="news_app.html#module-news_app.api_views">news_app.api_views</a>
 </li>
         <li><a href="news_app.html#module-news_app.apps">news_app.apps</a>
+</li>
+        <li><a href="news_app.html#module-news_app.forms">news_app.forms</a>
 </li>
         <li><a href="news_app.html#module-news_app.models">news_app.models</a>
 </li>
@@ -480,6 +538,13 @@
 
       <ul>
         <li><a href="news_app.html#module-news_app.apps">module</a>
+</li>
+      </ul></li>
+      <li>
+    news_app.forms
+
+      <ul>
+        <li><a href="news_app.html#module-news_app.forms">module</a>
 </li>
       </ul></li>
       <li>
@@ -581,6 +646,10 @@
 </li>
       <li><a href="news_app.html#news_app.views.newsletter_update">newsletter_update() (in module news_app.views)</a>
 </li>
+      <li><a href="news_app.html#news_app.forms.NewsletterForm">NewsletterForm (class in news_app.forms)</a>
+</li>
+      <li><a href="news_app.html#news_app.forms.NewsletterForm.Meta">NewsletterForm.Meta (class in news_app.forms)</a>
+</li>
       <li><a href="news_app.html#news_app.models.Article.newsletters">newsletters (news_app.models.Article attribute)</a>
 
       <ul>
@@ -643,8 +712,6 @@
 </li>
       <li><a href="news_app.html#news_app.models.Publisher">Publisher (class in news_app.models)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="news_app.html#news_app.models.Article.publisher">publisher (news_app.models.Article attribute)</a>
 
       <ul>
@@ -653,6 +720,8 @@
         <li><a href="news_app.html#news_app.models.User.publisher">(news_app.models.User attribute)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="news_app.html#news_app.models.Publisher.DoesNotExist">Publisher.DoesNotExist</a>
 </li>
       <li><a href="news_app.html#news_app.models.Publisher.MultipleObjectsReturned">Publisher.MultipleObjectsReturned</a>
@@ -674,6 +743,10 @@
       <li><a href="news_app.html#news_app.views.publisher_list">publisher_list() (in module news_app.views)</a>
 </li>
       <li><a href="news_app.html#news_app.views.publisher_profile">publisher_profile() (in module news_app.views)</a>
+</li>
+      <li><a href="news_app.html#news_app.forms.PublisherForm">PublisherForm (class in news_app.forms)</a>
+</li>
+      <li><a href="news_app.html#news_app.forms.PublisherForm.Meta">PublisherForm.Meta (class in news_app.forms)</a>
 </li>
       <li><a href="news_app.html#news_app.serializers.PublisherSerializer">PublisherSerializer (class in news_app.serializers)</a>
 </li>
@@ -924,6 +997,16 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="news_app.html#news_app.models.Publisher.website">website (news_app.models.Publisher attribute)</a>
 </li>
+      <li><a href="news_app.html#news_app.forms.ArticleForm.Meta.widgets">widgets (news_app.forms.ArticleForm.Meta attribute)</a>
+
+      <ul>
+        <li><a href="news_app.html#news_app.forms.JournalistArticleForm.Meta.widgets">(news_app.forms.JournalistArticleForm.Meta attribute)</a>
+</li>
+        <li><a href="news_app.html#news_app.forms.NewsletterForm.Meta.widgets">(news_app.forms.NewsletterForm.Meta attribute)</a>
+</li>
+        <li><a href="news_app.html#news_app.forms.PublisherForm.Meta.widgets">(news_app.forms.PublisherForm.Meta attribute)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
