@@ -25,7 +25,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-news-app-dev-key-2026")
 
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS = [".pythonanywhere.com", "127.0.0.1", "localhost"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
