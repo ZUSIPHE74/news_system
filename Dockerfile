@@ -27,5 +27,5 @@ COPY . /app/
 # Expose port
 EXPOSE 8000
 
-# Run the Django application
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Run the Django application using gunicorn in production after migrations and static collection
+CMD ["sh", "-c", "python manage.py migrate && python manage.py collectstatic --noinput && (python seed_se_articles.py || true) && gunicorn news_system.wsgi:application --bind 0.0.0.0:8000"]
