@@ -8,9 +8,11 @@ ENV PYTHONUNBUFFERED=1
 # Set work directory
 WORKDIR /app
 
-# Install system dependencies (required for some packages like Pillow)
+# Install system dependencies (required for Pillow and mysqlclient compiling)
 RUN apt-get update && apt-get install -y \
     gcc \
+    pkg-config \
+    default-libmysqlclient-dev \
     libjpeg-dev \
     zlib1g-dev \
     && rm -rf /var/lib/apt/lists/*

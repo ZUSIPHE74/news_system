@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  db:
+    image: mariadb:10.11
+    container_name: news_system_db
+    restart: always
+    environment:
+      MARIADB_DATABASE: news_db
+      MARIADB_USER: news_user
+      MARIADB_PASSWORD: news_password
+      MARIADB_ROOT_PASSWORD: root_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build: .
+    container_name: news_system_web
+    restart: always
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    environment:
+      - USE_SQLITE=False
+      - DB_NAME=news_db
+      - DB_USER=news_user
+      - DB_PASSWORD=news_password
+      - DB_HOST=db
+      - DB_PORT=3306
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - .:/app
+
+volumes:
+  mariadb_data:

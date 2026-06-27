@@ -116,17 +116,45 @@ python manage.py runserver
 
 ### 8. Run with Docker
 
-You can containerize and run the application using Docker:
+You can containerize the application to run with either SQLite or a MariaDB database.
 
-#### Build the Docker Image:
-```bash
-docker build -t news_system .
-```
+#### Option A: Multi-Container Setup using Docker Compose (Recommended)
+This workflow runs the Django application and a MariaDB database in separate linked containers, making the setup completely self-contained.
 
-#### Run the Docker Container:
-```bash
-docker run -p 8000:8000 --env-file .env news_system
-```
+1. **Start the containers**:
+   ```bash
+   docker compose up --build
+   ```
+   This command builds the Django image, downloads the MariaDB image, configures their private virtual network, starts the database, runs migrations, and starts the development server at `http://localhost:8000/`.
+
+2. **Stop the containers**:
+   ```bash
+   docker compose down
+   ```
+
+#### Option B: Standalone Docker Container (Connected to Host MariaDB)
+If you have a MariaDB/MySQL database running directly on your host machine (outside of Docker), you can run the application container and route database traffic back to the host.
+
+1. **Configure environment**:
+   Create or edit your local `.env` file and set the host to `host.docker.internal`:
+   ```env
+   USE_SQLITE=False
+   DB_NAME=news_db
+   DB_USER=root
+   DB_PASSWORD=your_host_db_password
+   DB_HOST=host.docker.internal
+   DB_PORT=3306
+   ```
+
+2. **Build the image**:
+   ```bash
+   docker build -t news_system .
+   ```
+
+3. **Run the container**:
+   ```bash
+   docker run -p 8000:8000 --env-file .env news_system
+   ```
 
 ---
 

@@ -69,28 +69,31 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "news_system.wsgi.application"
 
-# MariaDB is the default database for this project.
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.mysql",
-#         "NAME": os.getenv("DB_NAME", "news_db"),
-#         "USER": os.getenv("DB_USER", "root"),
-#         "PASSWORD": os.getenv("DB_PASSWORD", ""),
-#         "HOST": os.getenv("DB_HOST", "127.0.0.1"),
-#         "PORT": os.getenv("DB_PORT", "3306"),
-#         "OPTIONS": {
-#             "charset": "utf8mb4",
-#         },
-#     }
-# }
+# Database configuration
+# Defaults to SQLite for simple local setup. To use MariaDB/MySQL, set USE_SQLITE=False in your .env
+USE_SQLITE = os.getenv("USE_SQLITE", "True").lower() in ("true", "1", "yes")
 
-# Optional SQLite fallback for development (uncomment to use)
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+if not USE_SQLITE and os.getenv("DB_HOST"):
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.mysql",
+            "NAME": os.getenv("DB_NAME", "news_db"),
+            "USER": os.getenv("DB_USER", "root"),
+            "PASSWORD": os.getenv("DB_PASSWORD", ""),
+            "HOST": os.getenv("DB_HOST", "127.0.0.1"),
+            "PORT": os.getenv("DB_PORT", "3306"),
+            "OPTIONS": {
+                "charset": "utf8mb4",
+            },
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 AUTH_USER_MODEL = "news_app.User"
 
@@ -109,6 +112,7 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "static"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
