@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: news-system
+    runtime: python
+    buildCommand: ./build.sh
+    startCommand: gunicorn news_system.wsgi:application
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.12
+      - key: SECRET_KEY
+        generateValue: true
+      - key: USE_SQLITE
+        value: "True"

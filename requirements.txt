@@ -3,3 +3,5 @@ djangorestframework
 pillow
 requests>=2.31.0
 mysqlclient>=2.2.0
+gunicorn
+whitenoise[brotli]
